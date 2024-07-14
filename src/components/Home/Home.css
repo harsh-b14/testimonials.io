@@ -1,0 +1,29 @@
+.home-container {
+    background-image: url('img.jpg'); /* Replace with your actual image URL */
+    background-size: cover;
+    background-position: center;
+    min-height: 85vh; /* Ensure the background covers the entire viewport height */
+    padding-top: 2rem;
+    filter: brightness(1.2);
+}
+
+.text{
+    color: white;
+    font-size: 62px;
+    font-weight: 600;
+    font-family:sans-serif ;   
+}
+
+span{
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 60px;
+    
+}
+
+.try-button{
+    margin-top: 5%;
+}
+.text-container{
+    margin-left: 8%;
+    margin-top: 8%;
+}
