@@ -1,8 +1,8 @@
 .home-container {
-    background-image: url('img.jpg'); /* Replace with your actual image URL */
+    background-image: url('img.png'); /* Replace with your actual image URL */
     background-size: cover;
     background-position: center;
-    min-height: 85vh; /* Ensure the background covers the entire viewport height */
+    min-height: 100vh; /* Ensure the background covers the entire viewport height */
     padding-top: 2rem;
     filter: brightness(1.2);
 }
@@ -11,12 +11,13 @@
     color: white;
     font-size: 62px;
     font-weight: 600;
-    font-family:sans-serif ;   
+    font-family: Inter;
 }
 
 span{
     color: rgba(255, 255, 255, 0.6);
     font-size: 60px;
+    font-family: Evolventa  ;   
     
 }
 
