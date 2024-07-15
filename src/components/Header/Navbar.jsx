@@ -1,18 +1,19 @@
 import React from "react";
 import Logo from "./Logo";
 import { Link } from 'react-router-dom'
+import "./Header.css"
 
 export default function Navbar() {
     return (
         <>
-            <nav className="w-4/5 max-w-6xl h-16 m-auto px-4 py-2 rounded-lg flex items-center justify-between font-sans overflow-y-hidden  text-base sm:text-sm md:text-tiny lg:text-base" style={{ backgroundColor: "rgba(139, 148, 173, 0.15)   " }}>
-                <div className="flex justify-start items-center px-2 py-1 rounded-md w-1/5 ">
-                    <Logo />
+            <nav className="w-full max-w-6xl h-16 m-auto px-4 py-2 rounded-lg flex items-center justify-between overflow-y-hidden text-base sm:text-sm md:text-tiny lg:text-base" style={{backgroundColor : "rgba(139, 148, 173, 0.51)   "}}>
+                <div className="flex justify-center items-center h-14 px-2 py-1 rounded-md">
+                        <Logo />
                 </div>
-                <div className="flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white" style={{ backgroundColor: "rgba(3, 9, 32, 1)" }}>
+                <div className="flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white navLink" style={{ backgroundColor: "rgba(3, 9, 32, 1)" }}>
                     <div className="mx-16">
                         <ul className="flex items-center gap-8 ">
-
+                        
                             <li>Soultion</li>
                             <li className="text-pretty">About Us</li>
                             <li>FAQ</li>
@@ -20,7 +21,7 @@ export default function Navbar() {
 
                         </ul>
                     </div>
-
+                    
 
                     <div className="flex items-center gap-8 mx-8">
 
