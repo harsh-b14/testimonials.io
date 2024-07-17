@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css'; // Assuming you have a CSS file for styling
+import './Home.css';
 import Navbar from '../Header/Navbar';
 
 const Home = () => {

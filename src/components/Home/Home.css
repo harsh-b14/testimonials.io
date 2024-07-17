@@ -1,8 +1,8 @@
 .home-container {
-    background-image: url('img.jpg'); /* Replace with your actual image URL */
+    background-image: url('../../../BgImage.svg'); /* Replace with your actual image URL */
     background-size: cover;
     background-position: center;
-    min-height: 85vh; /* Ensure the background covers the entire viewport height */
+    min-height: 100vh; /* Ensure the background covers the entire viewport height */
     padding-top: 2rem;
     filter: brightness(1.2);
 }
