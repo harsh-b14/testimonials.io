@@ -1,5 +1,9 @@
 .home-container {
+<<<<<<< HEAD
     background-image: url('../../../BgImage.svg'); /* Replace with your actual image URL */
+=======
+    background-image: url('img.png'); /* Replace with your actual image URL */
+>>>>>>> 871d034375196536eafe2c9c0b98aefe9b03537d
     background-size: cover;
     background-position: center;
     min-height: 100vh; /* Ensure the background covers the entire viewport height */
@@ -8,15 +12,18 @@
 }
 
 .text{
-    color: white;
-    font-size: 62px;
     font-weight: 600;
-    font-family:sans-serif ;   
+    font-family: Inter;
 }
 
-span{
+.button{
+    font-family: Evolventa;
+}
+
+.spanText{
     color: rgba(255, 255, 255, 0.6);
     font-size: 60px;
+    font-family: Evolventa  ;   
     
 }
 
