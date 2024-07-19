@@ -10,7 +10,7 @@ function ResetPassword() {
             <section>
                 <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24 forgot-container">
                     <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md items-center">
-                        <div className="mb-2 flex justify-center ">
+                        <div className="mb-2 flex justify-center mt-6">
                             <svg
                                 width="95"
                                 height="47"
@@ -27,10 +27,9 @@ function ResetPassword() {
                                 />
                             </svg>
                         </div>
-                        <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-['poppins'] text-white">
+                        <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-['poppins'] text-white mt-4">
                             Reset password
                         </h2>
-
                         <form action="#" method="POST" className="mt-8">
                             <div className="space-y-5 ">
                                 <div className="mt-2 font-['Raleway']">
@@ -49,7 +48,7 @@ function ResetPassword() {
                                         placeholder="Enter otp"
                                     >
                                     </input>
-                                    <Link to="/Signup" className="flex items-center">
+                                    <Link to="/signin" className="flex items-center">
                                         <button className="text-white bg-green-700 hover:bg-green-800 focus:ring-2  font-medium rounded-lg text-xs px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800" >Verify OTP</button>
                                     </Link>
                                 </div>
@@ -79,19 +78,19 @@ function ResetPassword() {
                                     ></input>
                                 </div>
                                 <div>
-                                            <Link to="/">
-                                                <button
-                                                    type="button"
-                                                    className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
-                                                    style={{
-                                                        background:
-                                                            'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
+                                    <Link to="/signin">
+                                        <button
+                                            type="button"
+                                            className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
+                                            style={{
+                                                    background:
+                                                    'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
                                                     }}
                                                 >
-                                                    Sign Up  <ArrowRight className="ml-2" size={16} />
-                                                </button>
-                                            </Link>
-                                        </div>
+                                                Signin  <ArrowRight className="ml-2" size={16} />
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
                         </form>
                     </div>

@@ -13,7 +13,7 @@ function Signup() {
                             <img
                                 className="mx-auto h-4/5 w-3/4 rounded-md object-cover"
                                 src="LogoSymbol.svg"
-                                alt=""
+                                alt="Logo"
                             />
                         </div>
                         <div className="flex items-center justify-center sm:px-6 sm:py-4 lg:px-8 lg:py-4">
