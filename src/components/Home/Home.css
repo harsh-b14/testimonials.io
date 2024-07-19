@@ -1,9 +1,5 @@
 .home-container {
-<<<<<<< HEAD
-    background-image: url('../../../BgImage.svg'); /* Replace with your actual image URL */
-=======
-    background-image: url('img.png'); /* Replace with your actual image URL */
->>>>>>> 871d034375196536eafe2c9c0b98aefe9b03537d
+    background-image: url('../../../img.svg'); /* Replace with your actual image URL */
     background-size: cover;
     background-position: center;
     min-height: 100vh; /* Ensure the background covers the entire viewport height */

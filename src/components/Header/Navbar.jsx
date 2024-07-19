@@ -25,10 +25,10 @@ export default function Navbar() {
 
                     <div className="flex items-center gap-8 mx-8">
 
-                        <Link to="/Signin" className="flex items-center">
+                        <Link to="/signin" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
                         </Link>
-                        <Link to="/Signup" className="flex items-center">
+                        <Link to="/signup" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign up</button>
                         </Link>
 
