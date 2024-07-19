@@ -24,7 +24,11 @@ export default function Navbar() {
                     
 
                     <div className="flex items-center gap-8 mx-8">
-
+                        {/* if (locals.user) {
+                            
+                        } else {
+                            
+                        } */}
                         <Link to="/Signin" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
                         </Link>

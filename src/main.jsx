@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import { Route } from 'react-router-dom'
-import App from './App.jsx'
 import Home from './components/Home/home.jsx'
 import './index.css'
 import Signin from './components/Siginin/Signin.jsx'
 import Signup from './components/Signup/Signup.jsx'
+import ResetPassword from './components/ResetPassword/ResetPassword.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +16,7 @@ const router = createBrowserRouter(
       <Route path="signin" element={<Signin/>}>
         <Route path="" element={<Home/>}/>
         <Route path="signup" element={<Signup/>}/>
+        <Route path='resetpassword' element={<ResetPassword/>}/>
       </Route>
       <Route path="signup" element={<Signup/>}>
         <Route path="" element={<Home/>}/>

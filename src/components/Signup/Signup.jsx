@@ -34,7 +34,7 @@ function Signup() {
                                 <div className="mt-6 space-y-3">
                                     <button
                                         type="button"
-                                        className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
+                                        className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-500 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
                                     >
                                         <span className="mr-2 inline-block ">
                                             <svg
@@ -50,7 +50,7 @@ function Signup() {
                                     </button>
                                     <button
                                         type="button"
-                                        className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
+                                        className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-500 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
                                     >
                                         <span className="mr-2 inline-block">
                                             <svg width="24" height="24" viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg" >
@@ -66,7 +66,7 @@ function Signup() {
 
                                         <div className="mt-2 font-['Raleway']">
                                             <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
+                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
                                                      focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
                                                 type="name"
                                                 placeholder="Name"
@@ -74,7 +74,7 @@ function Signup() {
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
                                             <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
+                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
                                                      focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
                                                 type="email"
                                                 placeholder="E-mail"
@@ -82,25 +82,27 @@ function Signup() {
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
                                             <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
+                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
                                                      focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
                                                 type="password"
                                                 placeholder="Create  password"
                                             ></input>
                                         </div>
                                         <div>
-                                            <button
-                                                type="button"
-                                                className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
-                                                style={{
-                                                    background:
-                                                        'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
-                                                }}
-                                            >
-                                                Sign Up  <ArrowRight className="ml-2" size={16} />
-                                            </button>
+                                            <Link to="/">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
+                                                    style={{
+                                                        background:
+                                                            'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
+                                                    }}
+                                                >
+                                                    Sign Up  <ArrowRight className="ml-2" size={16} />
+                                                </button>
+                                            </Link>
                                         </div>
-                                        
+
                                     </div>
                                 </form>
                             </div>
@@ -114,3 +116,4 @@ function Signup() {
 }
 
 export default Signup
+
