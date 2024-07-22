@@ -2,10 +2,24 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { APIError } from "../utils/APIError.js";
 import { User } from "../models/user.models.js";
 import { APIResponse } from "../utils/APIResponse.js";
-import jwt from "jsonwebtoken";
+
+const generateAndUpdateRefreshToken = async (user) => {
+    const refreshToken = await user.generateRefreshToken();
+    await User.findByIdAndUpdate(user._id,
+        {
+            $set: {
+                refreshToken,
+            }
+        },
+        {
+            new: true
+        }
+    )
+    return refreshToken;
+}
 
 const signUpUser = asyncHandler(async (req, res) => {
-    const {username, email, fullname, password} = req.body
+    const {username, email, fullname, password} = req.body;
 
     if (
         [username, email, fullname, password].some((field) =>
@@ -23,23 +37,33 @@ const signUpUser = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({
-        username: username.toLowerCase(),
+        username: username,
         email,
         fullname,
         password
     });
 
+    const refreshToken = await generateAndUpdateRefreshToken(user);
+    const accessToken = await user.generateAccessToken();
+
     const createdUser = await User.findById(user._id).select( // delete password and refreshToken while returning user to frontend
         "-password -refreshToken"
     )
-
     if(!createdUser){
         throw new APIError(500, "Internal server error")
     }
-
-    return res.status(201).json(
-        new APIResponse(200, createdUser, "User registered successfully")
-    )
+    
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+    
+    return res.status(201)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+            new APIResponse(200, createdUser, "User registered successfully")
+        )
 });
 
 const signInUser = asyncHandler(async (req, res) => {
@@ -63,7 +87,8 @@ const signInUser = asyncHandler(async (req, res) => {
         throw new APIError(401, "Password is incorrect")
     }
 
-    const { refreshToken, accessToken } = await generateAccessAndRefreshToken(user._id);
+    const refreshToken = await generateAndUpdateRefreshToken(user);
+    const accessToken = await user.generateAccessToken();
     
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken"
@@ -90,3 +115,8 @@ const signInUser = asyncHandler(async (req, res) => {
         )
     )
 })
+
+export {
+    signUpUser,
+    signInUser
+}
