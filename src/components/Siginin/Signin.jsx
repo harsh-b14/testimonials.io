@@ -2,24 +2,13 @@ import React from "react";
 import './Signin.css'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import Input from "../Input";
 
 
 function Signin() {
     return (
         <>
             <div className="signin-container">
-                {/* <nav className="w-4/5 max-w-6xl h-16 m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base" >
-                    <div className="flex justify-start items-center py-1 rounded-md" style={{ color: "#BAB8CE" }}>
-                        <Link to="/" className="flex items-center backButton ">
-                            <button
-                                className="inline-flex h-8 rounded-lg text-sm justify-center items-center px-2 py-1 hover:bg-slate-600 shrink-0 gap-3">
-                                <img src="arrow-left-icon.svg" className="w-6"></img>
-                                <h1 >Home</h1>
-                            </button>
-                        </Link>
-                    </div>
-                </nav>
-                 */}
                 <section>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className=" flex justify-center items-center">
@@ -66,29 +55,14 @@ function Signin() {
                                     <div className="space-y-5">
                                         <div>
                                             <div className="mt-2 font-['Raleway']">
-                                                <input
-                                                    className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                    type="email"
-                                                    placeholder="Enter registered email"
-                                                ></input>
+                                                <Input type="email" placeholder="Enter registered email" />
                                             </div>
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="text"
-                                                placeholder="Enter your username"
-                                            ></input>
+                                            <Input type="text" placeholder="Enter your username" />
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="password"
-                                                placeholder="Enter your password"
-                                            ></input>
+                                            <Input type="password" placeholder="Enter your password" />
                                         </div>
                                         <div>
                                             <button
@@ -109,7 +83,7 @@ function Signin() {
                                             </Link>
                                         </span>
                                         <span className=" items-center flex justify-center  text-white font-['Raleway'] font-semibold">
-                                            <Link to="/signup" className="-mt-4">
+                                            <Link to="/resetpassword" className="-mt-4">
                                                 Forgot password ?
                                             </Link>
                                         </span>

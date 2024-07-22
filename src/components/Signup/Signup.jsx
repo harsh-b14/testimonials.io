@@ -2,6 +2,7 @@ import React from "react";
 import './Signup.css'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import Input from "../Input";
 
 function Signup() {
     return (
@@ -52,36 +53,16 @@ function Signup() {
                                 <form action="#" method="POST" className="mt-3">
                                     <div className="space-y-5">
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="name"
-                                                placeholder="Enter your fullname"
-                                            ></input>
+                                            <Input type="text" placeholder="Enter your fullname"/>
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="text"
-                                                placeholder="Create username"
-                                            ></input>
+                                            <Input type="text" placeholder="Create your username"/>
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-100 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="email"
-                                                placeholder="Enter your email"
-                                            ></input>
+                                            <Input type="email" placeholder="Enter your email"/>
                                         </div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <input
-                                                className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                                type="password"
-                                                placeholder="Create a strong password"
-                                            ></input>
+                                            <Input type="password" placeholder="Create a strong password"/>
                                         </div>
                                         <div>
                                             <Link to="/">

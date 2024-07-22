@@ -2,6 +2,7 @@ import React from 'react'
 import "./ResetPassword.css"
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import Input from '../Input'
 
 
 function ResetPassword() {
@@ -33,21 +34,10 @@ function ResetPassword() {
                         <form action="#" method="POST" className="mt-8">
                             <div className="space-y-5 ">
                                 <div className="mt-2 font-['Raleway']">
-                                    <input
-                                        className="flex px-6 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-md placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                        type="email"
-                                        placeholder="Enter email address"
-                                    ></input>
+                                    <Input type="email" placeholder="Enter registered email" />
                                 </div>
                                 <div className="mt-2 font-['Raleway'] flex w-full border-solid border-[#6881a4] border-4 rounded-[16px] hover:bg-[rgba(210,215,228,0.3)]">
-                                    <input
-                                        className="flex px-6 py-2.5 w-4/5 bg-[rgba(217,217,217,0)] text-sm placeholder:text-gray-400  hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                        type="email"
-                                        placeholder="Enter otp"
-                                    >
-                                    </input>
+                                    <Input type="text" placeholder="Enter otp" />
                                     <Link to="/signin" className="flex items-center">
                                         <button className="text-white bg-green-700 hover:bg-green-800 focus:ring-2  font-medium rounded-lg text-xs px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800" >Verify OTP</button>
                                     </Link>
@@ -62,20 +52,10 @@ function ResetPassword() {
                                     otp has been sent to your registered email address
                                 </p>
                                 <div className="mt-2 font-['Raleway'] items-center flex">
-                                    <input
-                                        className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                        type="password"
-                                        placeholder="Reset password"
-                                    ></input>
+                                    <Input type="password" placeholder="Enter new password" />
                                 </div>
                                 <div className="mt-2 font-['Raleway']">
-                                    <input
-                                        className="flex px-3.5 py-2.5 w-full bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] text-sm placeholder:text-gray-400 hover:bg-[rgba(210,215,228,0.3)] hover:placeholder:text-black hover:border-[#8B94AD] focus:bg-gray-500 focus:text-black
-                                                     focus:outline-none transition-all duration-200 focus:ring-offset-0.5 disabled:cursor-not-allowed disabled:opacity-50"
-                                        type="password"
-                                        placeholder="Confirm password"
-                                    ></input>
+                                    <Input type="password" placeholder="Confirm new password" />
                                 </div>
                                 <div>
                                     <Link to="/signin">
