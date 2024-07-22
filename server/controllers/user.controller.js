@@ -116,7 +116,38 @@ const signInUser = asyncHandler(async (req, res) => {
     )
 })
 
+const signOutUser = asyncHandler(async (req, res) => {
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                refreshToken: ""
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res 
+            .status(200)
+            .cookie("accessToken", "", options)
+            .cookie("refreshToken", "", options)
+            .json(
+                new APIResponse(200, {}, "User logged out successfully")
+            )
+})
+
+const createNewSpace = asyncHandler(async (req, res) => {
+})
+
 export {
     signUpUser,
-    signInUser
+    signInUser,
+    signOutUser
 }
