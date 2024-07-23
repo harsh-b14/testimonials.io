@@ -143,11 +143,33 @@ const signOutUser = asyncHandler(async (req, res) => {
             )
 })
 
+const resetPassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body
+    
+    const user = await User.findById(req.user?._id)
+
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
+    if(!isPasswordCorrect){
+        throw new APIError(400, "Invalid ")
+    }
+
+    user.password = newPassword
+    await user.save({validateBeforeSave: false})
+
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, {}, "Password has been changed successfullly")
+            )
+})
+
 const createNewSpace = asyncHandler(async (req, res) => {
 })
 
 export {
     signUpUser,
     signInUser,
-    signOutUser
+    signOutUser,
+    createNewSpace,
+    resetPassword
 }
