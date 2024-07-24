@@ -3,7 +3,9 @@ import { APIError } from "../utils/APIError.js";
 import { User } from "../models/user.models.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { sendMail } from "../utils/sendmail.js";
-import { send } from "vite";
+import { OAuth2Client } from "google-auth-library";
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const generateAndUpdateRefreshToken = async (user) => {
     const refreshToken = await user.generateRefreshToken();
@@ -223,7 +225,50 @@ const createNewSpace = asyncHandler(async (req, res) => {
 })
 
 const googlesignup = asyncHandler(async (req, res) => {
-    console.log("router reached");
+    console.log("entered route");
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const { name, email, picture, sub } = ticket.getPayload();
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        const username = email.split('@')[0];
+        user = new User({
+            username,
+            email,
+            fullname: name,
+            password: sub
+        });
+        await user.save();
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    console.log("route executed");
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, 
+                {
+                    accessToken,
+                    refreshToken,
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        fullname: user.fullname,
+                        imageUrl: picture
+                    }
+                }, "User logged in successfully with Google")
+            )
 })
 
 export {
