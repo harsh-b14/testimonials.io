@@ -2,6 +2,8 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { APIError } from "../utils/APIError.js";
 import { User } from "../models/user.models.js";
 import { APIResponse } from "../utils/APIResponse.js";
+import { sendMail } from "../utils/sendmail.js";
+import { send } from "vite";
 
 const generateAndUpdateRefreshToken = async (user) => {
     const refreshToken = await user.generateRefreshToken();
@@ -17,6 +19,8 @@ const generateAndUpdateRefreshToken = async (user) => {
     )
     return refreshToken;
 }
+
+var globalOTP = [];
 
 const signUpUser = asyncHandler(async (req, res) => {
     const {username, email, fullname, password} = req.body;
@@ -57,13 +61,23 @@ const signUpUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
     }
+
+    // const otp = sendOTP(email);
+    // console.log(otp);
+    // globalOTP.push({
+    //     otp: otp,
+    //     email
+    // });
+    req.email = email;
+    // console.log(globalOTP);
     
     return res.status(201)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
-        .json(
-            new APIResponse(200, createdUser, "User registered successfully")
-        )
+        // .json(
+        //    new APIResponse(200, { createdUser, otp} , "User registered successfully")
+        // )
+        .redirect("/user/sendotp");
 });
 
 const signInUser = asyncHandler(async (req, res) => {
@@ -143,6 +157,48 @@ const signOutUser = asyncHandler(async (req, res) => {
             )
 })
 
+const sendOTP = asyncHandler(async (req, res) => {
+    const email = req.email;
+    console.log(email);
+    if(!email || email === ""){
+        throw new APIError(400, "Email not found")
+    }
+    try {
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        sendMail(email);
+        globalOTP.push({
+                otp: otp,
+                email
+            });
+    } catch (error) {
+        throw new APIError(500, "Internal server error")
+    }
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, {OTP}, "OTP sent successfully")
+            )
+})
+
+const verifyOTP = asyncHandler(async (req, res) => {
+    const { otp } = req.body;
+    const email = req.email;
+    const userOTP = globalOTP.filter((otp) => otp.email === email);
+    console.log(userOTP);
+    if(!userOTP){
+        throw new APIError(400, "OTP not found")
+    }
+    if(userOTP.otp !== otp){
+        throw new APIError(400, "Invalid OTP")
+    }
+    req.email = "";
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, {}, "OTP verified successfully")
+            )
+})
+
 const resetPassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body
     
@@ -166,10 +222,17 @@ const resetPassword = asyncHandler(async (req, res) => {
 const createNewSpace = asyncHandler(async (req, res) => {
 })
 
+const googlesignup = asyncHandler(async (req, res) => {
+    console.log("router reached");
+})
+
 export {
     signUpUser,
     signInUser,
     signOutUser,
     createNewSpace,
-    resetPassword
+    resetPassword,
+    verifyOTP,
+    sendOTP,
+    googlesignup
 }

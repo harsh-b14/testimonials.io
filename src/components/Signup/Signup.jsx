@@ -3,8 +3,16 @@ import './Signup.css'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import Input from "../Input";
+import GoogleSignUpButton from "../GoogleSignUpButton";
 
 function Signup() {
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        // console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
     return (
         <>
             <div className="signin-container">
@@ -21,7 +29,9 @@ function Signup() {
                             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign Up</h2>
                                 <div className="mt-6 space-y-3">
-                                    <button
+                                {/* <GoogleLogin> */}
+                                    {/* <button
+                                        onClick={onSignIn}
                                         type="button"
                                         className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-500 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
                                     >
@@ -36,7 +46,9 @@ function Signup() {
                                             </svg>
                                         </span>
                                         Signup with Google
-                                    </button>
+                                    </button> */}
+                                    <GoogleSignUpButton />
+                                {/* </GoogleLogin> */}
                                     <button
                                         type="button"
                                         className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-500 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
@@ -92,6 +104,7 @@ function Signup() {
                     </div>
                 </section>
             </div>
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
         </>
     )
 }
