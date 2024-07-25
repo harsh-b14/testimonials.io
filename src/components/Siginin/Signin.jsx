@@ -107,8 +107,8 @@ function Signin() {
                                         {' '}Create a account
                                     </Link>
                                 </span>
-                                <span className=" items-center flex justify-center  text-white font-['Raleway'] font-semibold">
-                                    <Link to="/ResetPassword">
+                                <span className="mt-2 text-sm text-white items-center flex justify-center font-['Raleway']">
+                                    <Link to="/ResetPassword" className=" items-center ml-2 font-semibold text-lg">
                                         Forgot password ?
                                     </Link>
                                 </span>
