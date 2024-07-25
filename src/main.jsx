@@ -8,6 +8,7 @@ import './index.css'
 import Signin from './components/Siginin/Signin.jsx'
 import Signup from './components/Signup/Signup.jsx'
 import ResetPassword from './components/ResetPassword/ResetPassword.jsx'
+import { GoogleOAuthProvider } from "@react-oauth/google"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,9 +16,8 @@ const router = createBrowserRouter(
       <Route path="" element={<Home/>}/>
       <Route path="signin" element={<Signin/>}>
         <Route path="" element={<Home/>}/>
-        <Route path="signup" element={<Signup/>}/>
-        <Route path='resetpassword' element={<ResetPassword/>}/>
       </Route>
+      <Route path='resetpassword' element={<ResetPassword/>}/>
       <Route path="signup" element={<Signup/>}>
         <Route path="" element={<Home/>}/>
       </Route>
@@ -27,7 +27,11 @@ const router = createBrowserRouter(
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
+  <GoogleOAuthProvider clientId='863438307177-pritp613man52ieef0m068dvob631gs4.apps.googleusercontent.com'>
+    <React.StrictMode>
+      <RouterProvider router={router}/>
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 )
+
+

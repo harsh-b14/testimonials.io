@@ -5,7 +5,7 @@ import "./index.css"
 function Layout() {
     return (
       <>
-      <Outlet/>
+        <Outlet/>
       </>
     )
   }
