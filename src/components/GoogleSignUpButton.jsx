@@ -116,6 +116,11 @@ const GoogleSignUpButton = () => {
     <GoogleOAuthProvider clientId={clientId}>
       <GoogleLogin
         onSuccess={onSuccess}
+        theme='filled_blue'
+        size='large'
+        shape='pill'
+        type='standard'
+        // logo_alignment='left'
         onError={onError}
         render={(renderProps) => (
           <Button 

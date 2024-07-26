@@ -37,9 +37,13 @@ function ResetPassword() {
                                     <Input type="email" placeholder="Enter registered email" />
                                 </div>
                                 <div className="mt-2 font-['Raleway'] flex w-full border-solid border-[#6881a4] border-4 rounded-[16px] hover:bg-[rgba(210,215,228,0.3)]">
-                                    <Input type="text" placeholder="Enter otp" />
-                                    <Link to="/signin" className="flex items-center">
-                                        <button className="text-white bg-green-700 hover:bg-green-800 focus:ring-2  font-medium rounded-lg text-xs px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800" >Verify OTP</button>
+                                <Input type="text" placeholder="Enter otp" className="w-full px-3.5 py-2.5 outline-none bg-transparent"/>
+                                    <Link to="" className="flex items-center">
+                                        <button className="text-white bg-green-700 hover:bg-green-800 rounded-[12px] text-xs px-3 py-[3px] dark:bg-blue-600 dark:hover:bg-blue-700 border-[0 0 x x] dark:focus:ring-blue-800" style={{
+                                            borderBottomLeftRadius:'0',
+                                            borderTopLeftRadius:'0',
+                                            marginRight:'1px'
+                                        }}>Verify OTP</button>
                                     </Link>
                                 </div>
                                 <p className='sm:text-xs md:text-sm lg:text-tiny pl-4 pt-0.5'

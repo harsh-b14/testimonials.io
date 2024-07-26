@@ -18,7 +18,7 @@ function Signin() {
                                 alt=""
                             />
                         </div>
-                        <div className="flex items-center justify-center px-4 py-4 mt-3 sm:px-6 sm:py-4 lg:px-8 lg:py-4">
+                        <div className="flex items-center justify-center px-4 py-4 mt-3 sm:px-6 sm:py-4 lg:px-8 lg:py-4 mt-20">
                             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign In</h2>
                                 <div className="mt-6 space-y-3">
@@ -77,13 +77,13 @@ function Signin() {
                                             </button>
                                         </div>
                                         <span className="mt-2 text-sm text-white items-center flex justify-center font-['Raleway']">
-                                            <p className="inline-block">Don&apos;t have an account ?{' '}</p>
-                                            <Link to="/signup" className=" items-center ml-2 font-semibold text-lg">
+                                            <p className="inline-block text-base">Don&apos;t have an account ?{' '}</p>
+                                            <Link to="/signup" className=" items-center ml-2 text-base font-semibold">
                                                 {' '}Create a account
                                             </Link>
                                         </span>
-                                        <span className=" items-center flex justify-center  text-white font-['Raleway'] font-semibold">
-                                            <Link to="/resetpassword" className="-mt-4">
+                                        <span className=" items-center flex justify-center text-white font-['Raleway'] ">
+                                            <Link to="/resetpassword" className="-mt-4 text-base">
                                                 Forgot password ?
                                             </Link>
                                         </span>

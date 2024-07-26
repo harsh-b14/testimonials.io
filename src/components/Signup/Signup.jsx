@@ -25,10 +25,10 @@ function Signup() {
                                 alt="Logo"
                             />
                         </div>
-                        <div className="flex items-center justify-center sm:px-6 sm:py-4 lg:px-8 lg:py-4">
-                            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+                        <div className="flex items-center justify-center sm:px-6 sm:py-4 lg:px-4 mt-20">
+                            <div className="w-4/6">
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign Up</h2>
-                                <div className="mt-6 space-y-3">
+                                <div className="mt-6 space-y-3 w-full flex items-center justify-center">
                                 {/* <GoogleLogin> */}
                                     {/* <button
                                         onClick={onSignIn}
@@ -49,7 +49,7 @@ function Signup() {
                                     </button> */}
                                     <GoogleSignUpButton className="w-full"/>
                                 {/* </GoogleLogin> */}
-                                    <button
+                                    {/* <button
                                         type="button"
                                         className="relative inline-flex w-full items-center justify-center px-3.5 py-2.5  text-white transition-all duration-200 hover:bg-[rgba(210,215,228,0.3)] hover:text-black focus:bg-gray-500 focus:text-black focus:outline-none bg-[rgba(217,217,217,0)] border-solid border-[#6881a4] border-4 rounded-[16px] hover:border-[#8B94AD] font-['Raleway']"
                                     >
@@ -59,7 +59,7 @@ function Signup() {
                                             </svg>
                                         </span>
                                         Signup with Github
-                                    </button>
+                                    </button> */}
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>
                                 <form action="#" method="POST" className="mt-3">
@@ -91,8 +91,8 @@ function Signup() {
                                             </Link>
                                         </div>
                                         <span className="mt-2 text-sm text-white items-center flex justify-center font-['Raleway']">
-                                            <p className="inline-block">Already have an account?{' '}</p>
-                                            <Link to="/signin" className=" items-center ml-2 font-semibold text-lg">
+                                            <p className="inline-block font-['Raleway'] text-base">Already have an account?{' '}</p>
+                                            <Link to="/signin" className=" items-center ml-2 font-['Raleway'] text-lg font-semibold">
                                                 {' '}Signin
                                             </Link>
                                         </span>
