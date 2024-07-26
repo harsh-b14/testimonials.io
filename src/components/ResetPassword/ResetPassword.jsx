@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import Input from '../Input'
 
-
 function ResetPassword() {
     return (
         <>

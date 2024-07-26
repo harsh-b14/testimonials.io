@@ -4,6 +4,8 @@ import { User } from "../models/user.models.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { sendMail } from "../utils/sendmail.js";
 import { OAuth2Client } from "google-auth-library";
+import { Space } from "../models/space.models.js";
+import { Question } from "../models/question.models.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -159,6 +161,53 @@ const signOutUser = asyncHandler(async (req, res) => {
             )
 })
 
+const googlesignup = asyncHandler(async (req, res) => {
+    console.log("entered route");
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const { name, email, picture, sub } = ticket.getPayload();
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        const username = email.split('@')[0];
+        user = new User({
+            username,
+            email,
+            fullname: name,
+            password: sub
+        });
+        await user.save();
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    console.log("route executed");
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, 
+                {
+                    accessToken,
+                    refreshToken,
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        fullname: user.fullname,
+                        imageUrl: picture
+                    }
+                }, "User logged in successfully with Google")
+            )
+})
+
 const sendOTP = asyncHandler(async (req, res) => {
     const email = req.email;
     console.log(email);
@@ -222,52 +271,69 @@ const resetPassword = asyncHandler(async (req, res) => {
 })
 
 const createNewSpace = asyncHandler(async (req, res) => {
-})
-
-const googlesignup = asyncHandler(async (req, res) => {
-    console.log("entered route");
-    const { token } = req.body;
-    const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID
-    });
-
-    const { name, email, picture, sub } = ticket.getPayload();
-
-    let user = await User.findOne({ email });
-
-    if (!user) {
-        const username = email.split('@')[0];
-        user = new User({
-            username,
-            email,
-            fullname: name,
-            password: sub
-        });
-        await user.save();
+    const { userId } = req.user._id;
+    if(!userId){
+        throw new APIError(400, "User not found")
     }
 
-    const accessToken = await user.generateAccessToken();
-    const refreshToken = await user.generateRefreshToken();
+    const { spaceName, headerTitle, customMessage, collectionType } = req.body;
+    if(!spaceName || !headerTitle || !customMessage || !collectionType){
+        throw new APIError(400, "All fields are required")
+    }
 
-    user.refreshToken = refreshToken;
-    await user.save();
+    const existedSpace = await Space.findOne({
+        spaceName
+    })
+    if(existedSpace){
+        throw new APIError(409, "Space name already exist");
+    }
 
-    console.log("route executed");
+    if(collectionType !== "Text" && collectionType !== "Video" && collectionType !== "Both text and video"){
+        throw new APIError(400, "Invalid collection type")
+    }
+
+    const { que1, que2, que3 } = req.body;
+    if(!que1 || !que2 || !que3){
+        throw new APIError(400, "All questions are required")
+    }
+
+    const createdQuestions = await Question.insertMany([
+        { question: que1 },
+        { question: que2 },
+        { question: que3 }
+    ])
+
+    if(!createdQuestions){
+        throw new APIError(500, "Internal server error")
+    }
+
+    const questionsId = [
+        createdQuestions[0]._id,
+        createdQuestions[1]._id,
+        createdQuestions[2]._id
+    ]
+    
+    if(!questionsId){
+        throw new APIError(500, "Internal server error")
+    }
+    
+    const space = await Space.create({
+        userId,
+        spaceName,
+        headerTitle,
+        customMessage,
+        collectionType,
+        questions: questionsId
+    })
+
+    if(!space){
+        throw new APIError(500, "Internal server error")
+    }
+
     return res
-            .status(200)
+            .status(201)
             .json(
-                new APIResponse(200, 
-                {
-                    accessToken,
-                    refreshToken,
-                    user: {
-                        username: user.username,
-                        email: user.email,
-                        fullname: user.fullname,
-                        imageUrl: picture
-                    }
-                }, "User logged in successfully with Google")
+                new APIResponse(201, { space, createdQuestions}, "Space created successfully")
             )
 })
 

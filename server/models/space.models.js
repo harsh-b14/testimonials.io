@@ -9,6 +9,7 @@ const spaceSchema = new Schema({
     },
     spaceName: {
         type: String,
+        unique: true,
         required: true,
         trim: true,
         index: true

@@ -21,15 +21,6 @@ const Button = ({ type, children, onClick, disabled }) => {
             </span>
             {children}
         </button>
-
-
-        // <button
-        //     type={type}
-        //     onClick={onClick}
-        //     className=""
-        // >
-        //     {children}
-        // </button>
     )
 }
 
