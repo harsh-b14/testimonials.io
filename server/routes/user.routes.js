@@ -19,6 +19,4 @@ router.route("/verifyotp").post(verifyOTP);
 
 router.route("/googlesignup").post(googlesignup);
 
-router.route("/create-space").post(auth, createNewSpace);
-
 export default router;
