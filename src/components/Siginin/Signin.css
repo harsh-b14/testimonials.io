@@ -3,7 +3,7 @@
     background-size:contain;
     background-position: center;
     min-height: 100vh; /* Ensure the background covers the entire viewport height */
-    padding: 2rem;
+    /* padding: 2rem; */
     filter: brightness(1.2);
 }
 
