@@ -21,7 +21,9 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 import userRouter from "./routes/user.routes.js";
+import spaceRouter from "./routes/space.routes.js";
 
 app.use("/user", userRouter);
+app.use("/space", spaceRouter);
 
 export { app }

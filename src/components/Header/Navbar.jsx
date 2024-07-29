@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./Logo";
-import LogoSymbol from "./LogoSymbol";
 import { Link } from 'react-router-dom'
 import { CheckCircle, ChevronDown, ChevronUp, Menu, Star, X } from 'lucide-react'
 import "./Header.css"

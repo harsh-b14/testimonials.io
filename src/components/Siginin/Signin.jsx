@@ -25,6 +25,7 @@ function Signin() {
                                 <div className="mt-6 space-y-3 w-full flex items-center justify-center">
                                    
                                     <GoogleSignUpButton/>
+                                
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>
                                 <form action="#" method="POST" className="mt-3">
@@ -70,8 +71,6 @@ function Signin() {
 
                     </div>
                 </section>
-
-
             </div>
         </>
     )

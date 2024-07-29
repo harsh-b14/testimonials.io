@@ -6,13 +6,6 @@ import Input from "../Input";
 import GoogleSignUpButton from "../GoogleSignUpButton";
 
 function Signup() {
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        // console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
     return (
         <>
             <div className="signin-container pb-8">
@@ -65,7 +58,7 @@ function Signup() {
                                         <span className="mt-2 text-sm text-white items-center flex justify-center font-['Raleway']">
                                             <p className="inline-block font-['Raleway'] lg:text-base md:text-base text-[12px]">Already have an account?{' '}</p>
                                             <Link to="/signin" className=" items-center ml-2 font-['Raleway'] lg:text-base md:text-base text-[14px] font-semibold">
-                                                {' '}Signin
+                                                {' '}Sign In
                                             </Link>
                                         </span>
                                     </div>

@@ -4,6 +4,8 @@ import { User } from "../models/user.models.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { sendMail } from "../utils/sendmail.js";
 import { OAuth2Client } from "google-auth-library";
+import { Space } from "../models/space.models.js";
+import { Question } from "../models/question.models.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -159,6 +161,53 @@ const signOutUser = asyncHandler(async (req, res) => {
             )
 })
 
+const googlesignup = asyncHandler(async (req, res) => {
+    console.log("entered route");
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const { name, email, picture, sub } = ticket.getPayload();
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        const username = email.split('@')[0];
+        user = new User({
+            username,
+            email,
+            fullname: name,
+            password: sub
+        });
+        await user.save();
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    console.log("route executed");
+    return res
+            .status(200)
+            .json(
+                new APIResponse(200, 
+                {
+                    accessToken,
+                    refreshToken,
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        fullname: user.fullname,
+                        imageUrl: picture
+                    }
+                }, "User logged in successfully with Google")
+            )
+})
+
 const sendOTP = asyncHandler(async (req, res) => {
     const email = req.email;
     console.log(email);
@@ -221,61 +270,10 @@ const resetPassword = asyncHandler(async (req, res) => {
             )
 })
 
-const createNewSpace = asyncHandler(async (req, res) => {
-})
-
-const googlesignup = asyncHandler(async (req, res) => {
-    console.log("entered route");
-    const { token } = req.body;
-    const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: process.env.GOOGLE_CLIENT_ID
-    });
-
-    const { name, email, picture, sub } = ticket.getPayload();
-
-    let user = await User.findOne({ email });
-
-    if (!user) {
-        const username = email.split('@')[0];
-        user = new User({
-            username,
-            email,
-            fullname: name,
-            password: sub
-        });
-        await user.save();
-    }
-
-    const accessToken = await user.generateAccessToken();
-    const refreshToken = await user.generateRefreshToken();
-
-    user.refreshToken = refreshToken;
-    await user.save();
-
-    console.log("route executed");
-    return res
-            .status(200)
-            .json(
-                new APIResponse(200, 
-                {
-                    accessToken,
-                    refreshToken,
-                    user: {
-                        username: user.username,
-                        email: user.email,
-                        fullname: user.fullname,
-                        imageUrl: picture
-                    }
-                }, "User logged in successfully with Google")
-            )
-})
-
 export {
     signUpUser,
     signInUser,
     signOutUser,
-    createNewSpace,
     resetPassword,
     verifyOTP,
     sendOTP,
