@@ -8,21 +8,23 @@ import GoogleSignUpButton from "../GoogleSignUpButton";
 function Signup() {
     return (
         <>
-            <div className="signin-container">
+            <div className="signin-container pb-8">
                 <section>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="flex justify-center items-center">
                             <img
-                                className="mx-auto h-4/5 w-3/4 rounded-md object-cover"
+                                className="mx-auto w-3/4 rounded-md object-cover lg:mt-20"
                                 src="LogoSymbol.svg"
                                 alt="Logo"
                             />
                         </div>
-                        <div className="flex items-center justify-center sm:px-6 sm:py-4 lg:px-4 mt-20">
-                            <div className="w-4/6">
+                        <div className="flex items-center justify-center px-4 sm:py-4 lg:px-8 lg:py-4 lg:mt-24">
+                            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md w-4/5 md:w-3/6 lg:w-5/6">
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign Up</h2>
                                 <div className="mt-6 space-y-3 w-full flex items-center justify-center">
-                                    <GoogleSignUpButton className="w-full"/>
+                                
+                                    <GoogleSignUpButton />
+                                
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>
                                 <form action="#" method="POST" className="mt-3">
@@ -54,9 +56,9 @@ function Signup() {
                                             </Link>
                                         </div>
                                         <span className="mt-2 text-sm text-white items-center flex justify-center font-['Raleway']">
-                                            <p className="inline-block font-['Raleway'] text-base">Already have an account?{' '}</p>
-                                            <Link to="/signin" className=" items-center ml-2 font-['Raleway'] text-lg font-semibold">
-                                                {' '}Signin
+                                            <p className="inline-block font-['Raleway'] lg:text-base md:text-base text-[12px]">Already have an account?{' '}</p>
+                                            <Link to="/signin" className=" items-center ml-2 font-['Raleway'] lg:text-base md:text-base text-[14px] font-semibold">
+                                                {' '}Sign In
                                             </Link>
                                         </span>
                                     </div>
