@@ -9,6 +9,7 @@ import Signin from './components/Siginin/Signin.jsx'
 import Signup from './components/Signup/Signup.jsx'
 import ResetPassword from './components/ResetPassword/ResetPassword.jsx'
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import Dashboard from './components/Dashboard/Dashboard.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +18,10 @@ const router = createBrowserRouter(
       <Route path="signin" element={<Signin/>}>
         <Route path="" element={<Home/>}/>
       </Route>
-      <Route path='resetpassword' element={<ResetPassword/>}/>
+      <Route path='resetpassword' element={<ResetPassword/>}>
+      </Route>
+      <Route path='dashboard' element={<Dashboard/>}></Route>
+
       <Route path="signup" element={<Signup/>}>
         <Route path="" element={<Home/>}/>
       </Route>

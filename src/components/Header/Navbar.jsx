@@ -33,7 +33,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base " style={{ backgroundColor: "rgba(139, 148, 173, 0.51)" }}>
+            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 navbar m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base " style={{ backgroundColor: "rgba(139, 148, 173, 0.51)" }}>
                 <div className="flex justify-center items-center h-14 px-2 py-1 rounded-md ">
                     <Logo/>
                 </div>
@@ -55,7 +55,7 @@ export default function Navbar() {
 
 
                     <div className=" items-center gap-8 mx-8 ">
-
+                            
                         <Link to="/signin" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
                         </Link>
