@@ -2,7 +2,6 @@
     background-image: url('img.svg'); /* Replace with your actual image URL */
     background-size: cover;
     background-position:center;
-    /* min-height: 100vh; Ensure the background covers the entire viewport height */
     padding-top: 2rem;
     filter: brightness(1.2);
     padding-bottom: 8rem;
@@ -12,7 +11,7 @@
 @media only screen and (max-width:767px) {
     .home-container {
         background-size: cover !important;  
-        padding-bottom: 3rem;
+        padding-bottom: 25px;
         border-radius: 0px 0px 2rem 2rem;
     }
 }

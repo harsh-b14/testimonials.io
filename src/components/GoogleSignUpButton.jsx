@@ -2,12 +2,16 @@ import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import Button from './Button';
+import { jwtDecode } from "jwt-decode";
 
 const GoogleSignUpButton = () => {
   const clientId = '863438307177-pritp613man52ieef0m068dvob631gs4.apps.googleusercontent.com';
 
   const onSuccess = async (response) => {
     console.log('Login Success:', response);
+
+    const credentialInfo = jwtDecode(response.credential);
+    console.log(credentialInfo);
 
     try {
       const { data } = await axios.post('http://localhost:8000/user/googlesignup', {

@@ -61,7 +61,7 @@ function ResetPassword() {
                                     <Input type="password" placeholder="Confirm new password" />
                                 </div>
                                 <div>
-                                    <Link to="/signin">
+                                    <Link to="/dashboard">
                                         <button
                                             type="button"
                                             className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"

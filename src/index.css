@@ -7,11 +7,29 @@
     src: local("Evolventa-Bold"),
     url("./fonts/EVOLVENTA-BOLD.TTF") format("truetype");
   }
+
+@font-face{
+  font-family: "Evolventa-regular";
+  src: local("Evolventa-regular"),
+  url("./fonts/EVOLVENTA-REGULAR.TTF") format("truetype");
+}
   
 @font-face{
   font-family: "Inter";
   src: local("Inter-Bold"),
   url("./fonts/Inter-Bold.ttf") format("truetype");
+}
+
+@font-face{
+  font-family: "Inter-Regular";
+  src: local("INTER-REGULAR"),
+  url("./fonts/INTER_REGULAR.TTF") format("truetype");
+}
+
+@font-face{
+  font-family: "Inter-Semibold";
+  src: local("INTER-SEMIBOLD"),
+  url("./fonts/INTER-SEMIBOLD.TTF") format("truetype");
 }
 
 @font-face{
