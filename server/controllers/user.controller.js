@@ -190,9 +190,16 @@ const googlesignup = asyncHandler(async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
     console.log("route executed");
     return res
             .status(200)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", refreshToken, options)
             .json(
                 new APIResponse(200, 
                 {
@@ -270,6 +277,12 @@ const resetPassword = asyncHandler(async (req, res) => {
             )
 })
 
+const getCurrentUser = asyncHandler(async(req, res) => {
+    return res
+            .status(200)
+            .json(200, req.user, "Current user fetched successfully")
+})
+
 export {
     signUpUser,
     signInUser,
@@ -277,5 +290,6 @@ export {
     resetPassword,
     verifyOTP,
     sendOTP,
-    googlesignup
+    googlesignup,
+    getCurrentUser
 }
