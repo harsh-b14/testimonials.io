@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { space } from "postcss/lib/list";
 
 const spaceSchema = new Schema({
     userId: {

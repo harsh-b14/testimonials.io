@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signUpUser, signInUser, signOutUser, resetPassword, sendOTP, verifyOTP, googlesignup, createNewSpace } from "../controllers/user.controller.js";
+import { signUpUser, signInUser, signOutUser, resetPassword, sendOTP, verifyOTP, googlesignup } from "../controllers/user.controller.js";
 // import { upload } from "../middlewares/multer.middleware.js";
 import { auth } from "../middlewares/auth.middlewares.js"
 
