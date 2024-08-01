@@ -37,7 +37,7 @@ export default function Navbar() {
                 <div className="flex justify-center items-center h-14 px-2 py-1 rounded-md ">
                     <Logo/>
                 </div>
-                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white navLink" style={{ backgroundColor: "rgba(3, 9, 32, 1)" }}>
+                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white font-Evolventa font-semibold" style={{ backgroundColor: "rgba(3, 9, 32, 1)" }}>
                     <div className="mx-20">
                         <ul className="flex space-x-8">
                             {menuItems.map((item) => (
@@ -57,7 +57,7 @@ export default function Navbar() {
                     <div className=" items-center gap-8 mx-8 ">
                             
                         <Link to="/signin" className="flex items-center">
-                            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
+                            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
                         </Link>
                         {/* <Link to="/signup" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign up</button>

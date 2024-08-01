@@ -20,9 +20,10 @@ export default {
               '6xl': '4rem',
               '7xl': '5rem',
             },
-    // fontFamily:{
-    //       'sans': ['inter','evolventa']
-    //         },
+    fontFamily:{
+          Evolventa : ["Evolventa" ,"sans-serif"],
+          Inter: ["Inter"]
+            },
     extend: {},
   },
   plugins: [],
