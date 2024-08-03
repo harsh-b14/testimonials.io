@@ -1,27 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "./Logo";
 import { Link } from 'react-router-dom'
 import { CheckCircle, ChevronDown, ChevronUp, Menu, Star, X } from 'lucide-react'
 import "./Header.css"
-
-const menuItems = [
-    {
-        name: 'Solution',
-        href: '#',
-    },
-    {
-        name: 'About Us',
-        href: '#',
-    },
-    {
-        name: 'FAQ',
-        href: '#',
-    },
-    {
-        name: 'Contact Us',
-        href: '#',
-    },
-]
+import { menuItems } from "../../constants";
+import axios from "axios";
 
 export default function Navbar() {
 
@@ -30,6 +13,26 @@ export default function Navbar() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
+
+    useEffect(() => {
+        // const  data  = await axios.get('http://localhost:8000/user/current_user');
+        // console.log(data);
+
+        // axios.get("http://localhost:8000/api/user/current-user")
+        // .then((result) => {
+        //     console.log(result);
+        // })
+
+        // const fetchData = async () => {
+        //     try {
+        //       const response = await axios.get("http://localhost:8000/user/current-user");
+        //       console.log(response.data);
+        //     } catch (error) {
+        //       console.error('Error fetching data:', error);
+        //     }
+        // };
+        // fetchData();
+    }, [])
 
     return (
         <>

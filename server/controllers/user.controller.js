@@ -24,10 +24,9 @@ const generateAndUpdateRefreshToken = async (user) => {
     return refreshToken;
 }
 
-var globalOTP = [];
-
 const signUpUser = asyncHandler(async (req, res) => {
     const {username, email, fullname, password} = req.body;
+    console.log(username, email, fullname, password);
 
     if (
         [username, email, fullname, password].some((field) =>
@@ -65,23 +64,13 @@ const signUpUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
     }
-
-    // const otp = sendOTP(email);
-    // console.log(otp);
-    // globalOTP.push({
-    //     otp: otp,
-    //     email
-    // });
-    req.email = email;
-    // console.log(globalOTP);
     
     return res.status(201)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
-        // .json(
-        //    new APIResponse(200, { createdUser, otp} , "User registered successfully")
-        // )
-        .redirect("/user/sendotp");
+        .json(
+           new APIResponse(200, { createdUser} , "User registered successfully")
+        );
 });
 
 const signInUser = asyncHandler(async (req, res) => {
@@ -190,9 +179,16 @@ const googlesignup = asyncHandler(async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
     console.log("route executed");
     return res
             .status(200)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", refreshToken, options)
             .json(
                 new APIResponse(200, 
                 {
@@ -270,6 +266,12 @@ const resetPassword = asyncHandler(async (req, res) => {
             )
 })
 
+const getCurrentUser = asyncHandler(async(req, res) => {
+    return res
+            .status(200)
+            .json(200, req.user, "Current user fetched successfully")
+})
+
 export {
     signUpUser,
     signInUser,
@@ -277,5 +279,6 @@ export {
     resetPassword,
     verifyOTP,
     sendOTP,
-    googlesignup
+    googlesignup,
+    getCurrentUser
 }
