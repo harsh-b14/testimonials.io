@@ -33,11 +33,18 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 navbar m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base " style={{ backgroundColor: "rgba(139, 148, 173, 0.51)" }}>
+            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 navbar m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base sticky-navbar " style={{ 
+                    backgroundColor: "rgba(139, 148, 173, 0.51)",
+                    backdropFilter:"blur(30px)", 
+                    boxShadow : "0px 0px 30px rgba(227, 228, 237, 0.2)",
+                    border: "1.2px solid rgba(255, 255, 255, 0.18)"
+                    }}>
                 <div className="flex justify-center items-center h-14 px-2 py-1 rounded-md ">
                     <Logo/>
                 </div>
-                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white font-Evolventa font-semibold" style={{ backgroundColor: "rgba(3, 9, 32, 1)" }}>
+                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white font-Evolventa" style={{ backgroundColor: "rgba(3, 9, 32, 1)",
+                fontWeight:"500"
+                 }}>
                     <div className="mx-20">
                         <ul className="flex space-x-8">
                             {menuItems.map((item) => (

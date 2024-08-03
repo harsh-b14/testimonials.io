@@ -12,3 +12,8 @@
         width: 90px;
     }
 }
+.sticky-navbar {
+    position: sticky;
+    top: 2rem;
+    z-index: 1000;
+}

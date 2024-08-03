@@ -24,7 +24,9 @@ export default {
           Evolventa : ["Evolventa" ,"sans-serif"],
           Inter: ["Inter"]
             },
-    extend: {},
+    extend: {
+      
+    },
   },
   plugins: [],
 }
