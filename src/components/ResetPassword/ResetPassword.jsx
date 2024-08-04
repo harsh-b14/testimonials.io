@@ -3,12 +3,87 @@ import "./ResetPassword.css"
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import Input from '../Input'
-
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+// import OTP from '../OTP/OTP'
 function ResetPassword() {
+
+    const { register, handleSubmit } = useForm()
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const signUpUser = async (data) => {
+        setError("");
+        try {
+            console.log(data);
+            const user = await axios.post("http://localhost:8000/user/signup", data);
+            console.log(user);
+            navigate("/");
+        }
+        catch (error) {
+            setError(error);
+            console.log("Error while signing up user: ", error);
+        }
+    }
+
+    const [otp, newOtp] = useState();
+    const [verfied, setVerfied] = useState(false);
+    const [otpVal, setOtpVal] = useState([]);
+    const textBase = useRef(null);
+
+    // generate random otp for each first render
+
+    useEffect(() => {
+        newOtp(Math.floor(1000 + Math.random() * 9000));
+    }, []);
+
+    const clearAll = () => {
+        textBase.current.classList.remove("otp-error");
+        textBase.current.childNodes.forEach((child) => {
+            child.value = "";
+        });
+        setOtpVal([]);
+        setVerfied(false);
+    };
+
+    const getOtp = () => {
+        if (parseInt(otpVal.join("")) === otp) {
+            textBase.current.classList.remove("otp-error");
+            setVerfied(true);
+        } else {
+            textBase.current.classList.add("otp-error");
+        }
+    };
+
+    const focusNext = (e) => {
+        const childCount = textBase.current.childElementCount;
+        const currentIndex = [...e.target.parentNode.children].indexOf(e.target);
+        if (currentIndex !== childCount - 1) {
+            e.target.nextSibling.focus();
+        } else {
+            const values = [];
+            textBase.current.childNodes.forEach((child) => {
+                values.push(child.value);
+            });
+            if (values.length !== 0) {
+                setOtpVal(values);
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (otpVal.length === textBase.current.childElementCount) {
+            getOtp();
+        }
+    }, [otpVal]);
+
+
     return (
         <>
             <section>
-                <div className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 lg:py-24 forgot-container">
+                <div className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 lg:py-24 forgot-container ">
                     <div className="sm:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md items-center">
                         <div className="mb-2 flex justify-center mt-6">
                             <svg
@@ -30,20 +105,45 @@ function ResetPassword() {
                         <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-['poppins'] text-white mt-4">
                             Reset password
                         </h2>
-                        <form action="#" method="POST" className="mt-8">
+                        <form onSubmit={handleSubmit(signUpUser)} className="mt-8">
                             <div className="space-y-5 ">
                                 <div className="mt-2 font-['Raleway']">
-                                    <Input type="email" placeholder="Enter registered email" />
+                                    <Input type="email" placeholder="Enter registered email"
+                                        {...register("email", {
+                                            required: true
+                                        })} />
                                 </div>
-                                <div className="mt-2 font-['Raleway'] flex w-full border-solid border-[#6881a4] border-4 rounded-[16px] hover:bg-[rgba(210,215,228,0.3)]">
-                                <Input type="text" placeholder="Enter otp" className="w-full px-3.5 py-2.5 outline-none bg-transparent"/>
-                                    <Link to="" className="flex items-center">
-                                        <button className="text-white bg-green-700 hover:bg-green-800 rounded-[12px] text-xs px-3 py-[3px] dark:bg-blue-600 dark:hover:bg-blue-700 border-[0 0 x x] dark:focus:ring-blue-800" style={{
-                                            borderBottomLeftRadius:'0',
-                                            borderTopLeftRadius:'0',
-                                            marginRight:'1px'
-                                        }}>Verify OTP</button>
-                                    </Link>
+                                <div className=''>
+                                    <h1 className='text-white'> Enter OTP : {otp}</h1>
+
+                                    <div className="mt-2 font-['Raleway']  flex w-full border-solid border-[#6881a4] border-4 rounded-[16px] hover:bg-[rgba(210,215,228,0.3)]">
+                                        <div className="font-['Raleway'] flex " ref={textBase}>
+                                            {new Array(4).fill(null).map((_, index) => {
+                                                return (
+                                                    <Input
+                                                        key={index}
+                                                        type="text"
+                                                        className="w-full px-3.5 outline-none bg-transparent base"
+                                                        onChange={(e) => focusNext(e, index)}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                        <button
+
+                                            className={`text-white bg-green-700 hover:bg-green-800 rounded-[12px] text-xs px-3 py-[3px] dark:bg-blue-600 dark:hover:bg-blue-700 border-[0 0 x x] dark:focus:ring-blue-800 ${otpVal.length > 0 ? 'show' : ''}`}
+
+                                            style={{
+                                                borderBottomLeftRadius: '0',
+                                                borderTopLeftRadius: '0',
+                                                marginRight: '1px',
+                                                marginTop:'1px',
+                                                marginBottom:'1px'
+
+                                            }} onClick={() => clearAll()}
+                                        >
+                                            {!verfied ? "Enter otp" : "OTP Verified"}</button>
+                                    </div>
                                 </div>
                                 <p className='sm:text-xs md:text-sm lg:text-tiny pl-4 pt-0.5'
                                     style={{
@@ -55,10 +155,17 @@ function ResetPassword() {
                                     otp has been sent to your registered email address
                                 </p>
                                 <div className="mt-2 font-['Raleway'] items-center flex">
-                                    <Input type="password" placeholder="Enter new password" />
+                                    <Input type="password" placeholder="Enter new password" 
+                                    {...register("new password", {
+                                        required: true
+                                    })}/>
+                                    
                                 </div>
                                 <div className="mt-2 font-['Raleway']">
-                                    <Input type="password" placeholder="Confirm new password" />
+                                    <Input type="password" placeholder="Confirm new password"
+                                    {...register("confirm password", {
+                                        required: true
+                                    })} />
                                 </div>
                                 <div>
                                     <Link to="/dashboard">
@@ -66,11 +173,11 @@ function ResetPassword() {
                                             type="button"
                                             className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
                                             style={{
-                                                    background:
+                                                background:
                                                     'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
-                                                    }}
-                                                >
-                                                Signin  <ArrowRight className="ml-2" size={16} />
+                                            }}
+                                        >
+                                            Signin  <ArrowRight className="ml-2" size={16} />
                                         </button>
                                     </Link>
                                 </div>
