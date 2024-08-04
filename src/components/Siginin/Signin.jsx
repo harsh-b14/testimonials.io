@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import './Signin.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import Input from "../Input";
 import GoogleSignUpButton from "../GoogleSignUpButton";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 
 function Signin() {
+    const { register, handleSubmit } = useForm();
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const signInUser = async (data) => {
+        setError("");
+        try{
+            console.log(data);
+            const user = await axios.post("http://localhost:8000/user/signin", data);
+            console.log(user);
+            navigate("/");
+        }
+        catch (error) {
+            setError(error);
+            console.log("Error while signing up user: ", error);
+        }
+    }
+
     return (
         <>
             <div className="signin-container pb-8">
-                <section>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className=" flex justify-center items-center">
                             <img
@@ -28,49 +47,58 @@ function Signin() {
                                 
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>
-                                <form action="#" method="POST" className="mt-3">
-                                    <div className="space-y-5">
-                                        <div>
-                                            <div className="mt-2 font-['Raleway']">
-                                                <Input type="email" placeholder="Enter registered email" />
-                                            </div>
-                                        </div>
+                                <form onSubmit={handleSubmit(signInUser)} className="mt-3">
+                                    <div>
                                         <div className="mt-2 font-['Raleway']">
-                                            <Input type="text" placeholder="Enter your username" />
+                                            <Input type="email" placeholder="Enter registered email" 
+                                                {...register("email", {
+                                                    required: true
+                                                })}
+                                            />
                                         </div>
-                                        <div className="mt-2 font-['Raleway']">
-                                            <Input type="password" placeholder="Enter your password" />
-                                        </div>
-                                        <div>
-                                            <button
-                                                type="button"
-                                                className="inline-flex w-full items-center justify-center rounded-xl  px-3.5 py-2.5 leading-7 text-white font-['poppins']"
-                                                style={{
-                                                    background:
-                                                        'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
-                                                }}
-                                            >
-                                                Sign In  <ArrowRight className="ml-2" size={16} />
-                                            </button>
-                                        </div>
-                                        <span className="mt-2 text-white items-center flex justify-center font-['Raleway']">
-                                            <p className="lg:text-base md:text-base text-[12px]">Don&apos;t have an account ?{' '}</p>
-                                            <Link to="/signup" className="ml-2 lg:text-base md:text-base text-[14px] font-semibold">
-                                                {' '}Create a account
-                                            </Link>
-                                        </span>
-                                        <span className=" items-center flex justify-center text-white font-['Raleway'] ">
-                                            <Link to="/resetpassword" className="-mt-4 lg:text-base md:text-base text-[12px]">
-                                                Forgot password ?
-                                            </Link>
-                                        </span>
+                                    </div>
+                                    <div className="mt-2 font-['Raleway']">
+                                        <Input type="text" placeholder="Enter your username" 
+                                            {...register("username", {
+                                                required: true
+                                            })}
+                                        />
+                                    </div>
+                                    <div className="mt-2 font-['Raleway']">
+                                        <Input type="password" placeholder="Enter your password" 
+                                            {...register("password", {
+                                                required: true
+                                            })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            className="inline-flex w-full items-center justify-center rounded-xl px-3.5 py-2.5 leading-7 text-white font-['poppins'] mt-2"
+                                            style={{
+                                                background:
+                                                    'linear-gradient(329deg, rgba(147,170,198,1) 1%, rgba(114,62,168,1) 42%, rgba(85,43,129,1) 72%, rgba(60,26,95,1) 98%)'
+                                            }}
+                                        >
+                                            Sign In  <ArrowRight className="ml-2" size={16} />
+                                        </button>
                                     </div>
                                 </form>
+                                    <span className="mt-2 text-white items-center flex justify-center font-['Raleway']">
+                                        <p className="lg:text-base md:text-base text-[12px]">Don&apos;t have an account ?{' '}</p>
+                                        <Link to="/signup" className="ml-2 lg:text-base md:text-base text-[14px] font-semibold">
+                                            {' '}Create a account
+                                        </Link>
+                                    </span>
+                                    <span className=" items-center flex justify-center text-white font-['Raleway'] mt-3">
+                                        <Link to="/resetpassword" className="-mt-4 lg:text-base md:text-base text-[12px]">
+                                            Forgot password ?
+                                        </Link>
+                                    </span>
                             </div>
                         </div>
 
                     </div>
-                </section>
             </div>
         </>
     )

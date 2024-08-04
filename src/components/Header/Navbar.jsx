@@ -5,33 +5,32 @@ import { CheckCircle, ChevronDown, ChevronUp, Menu, Star, X } from 'lucide-react
 import "./Header.css"
 import { menuItems } from "../../constants";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+// import { login as storeLogin} from "../../store/authSlice";
 
 export default function Navbar() {
-
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [user, setUser] = React.useState(null);
+    const dispatch = useDispatch();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
     useEffect(() => {
-        // const  data  = await axios.get('http://localhost:8000/user/current_user');
-        // console.log(data);
-
-        // axios.get("http://localhost:8000/api/user/current-user")
-        // .then((result) => {
-        //     console.log(result);
-        // })
-
-        // const fetchData = async () => {
-        //     try {
-        //       const response = await axios.get("http://localhost:8000/user/current-user");
-        //       console.log(response.data);
-        //     } catch (error) {
-        //       console.error('Error fetching data:', error);
-        //     }
-        // };
-        // fetchData();
+        const getUserData= async () => {
+            const userData = await axios.get("http://localhost:8000/user/current-user", {
+                withCredentials: true
+            });
+            console.log("User data: ", userData);
+            if(userData.data){
+                console.log("user data || data: ", userData.data.data.user.username);
+                // dispatch(storeLogin(userData));
+                setUser(userData.data.data.user);
+                console.log("if condition completed");
+            }
+        }
+        getUserData();
     }, [])
 
     return (
@@ -65,14 +64,16 @@ export default function Navbar() {
 
 
                     <div className=" items-center gap-8 mx-8 ">
-                            
+                        {
+                            user && 
+                                <div className="flex items-center">
+                                    <span className="text-xs text-white">Welcome, {user.username}</span>
+                                    <ChevronDown className="h-6 w-6 text-white" />
+                                </div>
+                        }
                         <Link to="/signin" className="flex items-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
-                        </Link>
-                        {/* <Link to="/signup" className="flex items-center">
-                            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign up</button>
-                        </Link> */}
-
+                        </Link>   
                     </div>
                 </div>
                 <div className="lg:hidden">

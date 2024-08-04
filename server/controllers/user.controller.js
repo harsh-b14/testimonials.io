@@ -62,7 +62,10 @@ const signUpUser = asyncHandler(async (req, res) => {
     
     const options = {
         httpOnly: true,
-        secure: true,
+        // secure: true,
+        // sameSite: 'None',
+        // domain: "http://localhost:5173",
+        // path: "/"
     }
     
     return res.status(201)
@@ -103,7 +106,10 @@ const signInUser = asyncHandler(async (req, res) => {
     
     const options = {
         httpOnly: true,
-        secure: true,
+        // secure: true,
+        // sameSite: 'None',
+        // domain: "http://localhost:5173",
+        // path: "/"
     }
 
     return res
@@ -138,7 +144,10 @@ const signOutUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: true,
+        // secure: true,
+        // sameSite: 'None',
+        // domain: "http://localhost:5173",
+        // path: "/"
     }
 
     return res 
@@ -181,7 +190,10 @@ const googlesignup = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: true,
+        // secure: true,
+        // sameSite: 'None',
+        // domain: "http://localhost:5173",
+        // path: "/"
     }
 
     console.log("route executed");
@@ -267,9 +279,12 @@ const resetPassword = asyncHandler(async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler(async(req, res) => {
+    console.log(req.user);
     return res
             .status(200)
-            .json(200, req.user, "Current user fetched successfully")
+            .json(
+                new APIResponse(200, { user: req.user }, "Current user fetched successfully")
+            )
 })
 
 export {

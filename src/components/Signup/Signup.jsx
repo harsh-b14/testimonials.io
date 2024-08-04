@@ -7,19 +7,32 @@ import GoogleSignUpButton from "../GoogleSignUpButton";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { login as storeLogin } from "../../store/authSlice"
 
 function Signup() {
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState(""); 
     const navigate = useNavigate();   
+    const dispatch = useDispatch();
 
     const signUpUser = async (data) => {
         setError("");
         try{
-            console.log(data);
-            const user = await axios.post("http://localhost:8000/user/signup", data);
-            console.log(user);
-            navigate("/");
+            const response = await axios.post("http://localhost:8000/user/signup", data, {
+                withCredentials: true
+            });
+            if(response.data) {
+                // const userData = await axios.get("http://localhost:8000/user/current-user", {
+                //     withCredentials: true
+                // });
+                // if(userData.data){
+                //     console.log("user data: ", userData);
+                //     dispatch(storeLogin(userData));
+                //     console.log("if condition completed");
+                    navigate("/");
+                // }
+            }
         }
         catch (error) {
             setError(error);
