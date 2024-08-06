@@ -7,14 +7,11 @@ import GoogleSignUpButton from "../GoogleSignUpButton";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { login as storeLogin } from "../../store/authSlice"
 
 function Signup() {
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState(""); 
     const navigate = useNavigate();   
-    const dispatch = useDispatch();
 
     const signUpUser = async (data) => {
         setError("");
@@ -23,15 +20,7 @@ function Signup() {
                 withCredentials: true
             });
             if(response.data) {
-                // const userData = await axios.get("http://localhost:8000/user/current-user", {
-                //     withCredentials: true
-                // });
-                // if(userData.data){
-                //     console.log("user data: ", userData);
-                //     dispatch(storeLogin(userData));
-                //     console.log("if condition completed");
-                    navigate("/dashboard");
-                // }
+                navigate("/dashboard");
             }
         }
         catch (error) {
@@ -56,7 +45,7 @@ function Signup() {
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign Up</h2>
                                 <div className="mt-6 space-y-3 w-full flex items-center justify-center">
                                 
-                                    <GoogleSignUpButton />
+                                    <GoogleSignUpButton text="signup_with"/>
                                 
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>

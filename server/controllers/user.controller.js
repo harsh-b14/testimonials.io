@@ -99,6 +99,7 @@ const signInUser = asyncHandler(async (req, res) => {
 
     const refreshToken = await generateAndUpdateRefreshToken(user);
     const accessToken = await user.generateAccessToken();
+    console.log(accessToken, "\n", refreshToken);
     
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken"
@@ -106,10 +107,6 @@ const signInUser = asyncHandler(async (req, res) => {
     
     const options = {
         httpOnly: true,
-        // secure: true,
-        // sameSite: 'None',
-        // domain: "http://localhost:5173",
-        // path: "/"
     }
 
     return res

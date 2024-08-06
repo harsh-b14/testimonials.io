@@ -20,7 +20,7 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        const getUserData = async () => {
+        const getUserData= async () => {
             const userData = await axios.get("/user/current-user", {
                 withCredentials: true
             });
