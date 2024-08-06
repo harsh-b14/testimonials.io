@@ -17,9 +17,9 @@ function Signin() {
         setError("");
         try{
             console.log(data);
-            const user = await axios.post("http://localhost:8000/user/signin", data);
+            const user = await axios.post("/user/signin", data);
             console.log(user);
-            navigate("/");
+            navigate("/dashboard");
         }
         catch (error) {
             setError(error);
@@ -43,7 +43,7 @@ function Signin() {
                                 <h2 className="text-3xl leading-tight text-white sm:text-4xl text-center boldText">Sign In</h2>
                                 <div className="mt-6 space-y-3 w-full flex items-center justify-center">
                                    
-                                    <GoogleSignUpButton/>
+                                    <GoogleSignUpButton text="signin_with"/>
                                 
                                 </div>
                                 <p className="text-white text-center mt-3 font-['Raleway']">or</p>
