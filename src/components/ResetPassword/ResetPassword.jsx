@@ -18,7 +18,7 @@ function ResetPassword() {
         setError("");
         try {
             console.log(data);
-            const user = await axios.post("http://localhost:8000/user/signup", data);
+            const user = await axios.post("/user/signup", data);
             console.log(user);
             navigate("/");
         }

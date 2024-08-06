@@ -19,7 +19,7 @@ export default function Navbar() {
 
     useEffect(() => {
         const getUserData= async () => {
-            const userData = await axios.get("http://localhost:8000/user/current-user", {
+            const userData = await axios.get("/user/current-user", {
                 withCredentials: true
             });
             console.log("User data: ", userData);
