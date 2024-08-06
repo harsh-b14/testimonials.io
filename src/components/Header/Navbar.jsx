@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { Link } from 'react-router-dom'
 import { CheckCircle, ChevronDown, ChevronUp, Menu, Star, X } from 'lucide-react'
@@ -6,6 +6,8 @@ import "./Header.css"
 import { menuItems } from "../../constants";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 // import { login as storeLogin} from "../../store/authSlice";
 
 export default function Navbar() {
@@ -18,12 +20,12 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        const getUserData= async () => {
+        const getUserData = async () => {
             const userData = await axios.get("http://localhost:8000/user/current-user", {
                 withCredentials: true
             });
             console.log("User data: ", userData);
-            if(userData.data){
+            if (userData.data) {
                 console.log("user data || data: ", userData.data.data.user.username);
                 // dispatch(storeLogin(userData));
                 setUser(userData.data.data.user);
@@ -33,21 +35,28 @@ export default function Navbar() {
         getUserData();
     }, [])
 
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+
+    const toggleDropdown = () => {
+        setDropdownVisible(!dropdownVisible);
+    };
+
     return (
         <>
-            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 navbar m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base sticky-navbar " style={{ 
-                    backgroundColor: "rgba(139, 148, 173, 0.51)",
-                    backdropFilter:"blur(30px)", 
-                    boxShadow : "0px 0px 30px rgba(227, 228, 237, 0.2)",
-                    border: "1.2px solid rgba(255, 255, 255, 0.18)"
-                    }}>
+            <nav className="w-5/6 lg:max-w-screen-lg max-w-screen-md h-16 navbar m-auto px-4 py-2 rounded-lg flex items-center justify-between text-base sm:text-sm md:text-tiny lg:text-base sticky-navbar " style={{
+                backgroundColor: "rgba(139, 148, 173, 0.51)",
+                backdropFilter: "blur(30px)",
+                boxShadow: "0px 0px 30px rgba(227, 228, 237, 0.2)",
+                border: "1.2px solid rgba(255, 255, 255, 0.18)"
+            }}>
                 <div className="flex justify-center items-center h-14 px-2 py-1 rounded-md ">
-                    <Logo/>
+                    <Logo />
                 </div>
-                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white font-Evolventa" style={{ backgroundColor: "rgba(3, 9, 32, 1)",
-                fontWeight:"500"
-                 }}>
-                    <div className="mx-20">
+                <div className="hidden lg:flex bg-slate-500 h-12 mr-1 my-0.5 px-2 py-1 rounded-lg items-center justify-between w-4/5 text-white font-Evolventa" style={{
+                    backgroundColor: "rgba(3, 9, 32, 1)",
+                    fontWeight: "500"
+                }}>
+                    <div className="mx-16">
                         <ul className="flex space-x-8">
                             {menuItems.map((item) => (
                                 <li key={item.name}>
@@ -62,21 +71,30 @@ export default function Navbar() {
                         </ul>
                     </div>
 
+                    <div className="items-center gap-8 mx-2">
+                        {user ? (
+                            <div className="flex items-center justify-center gap-2 pr-4">
+                                <img src="user-icon.svg" width="30px"></img>
+                                <span className="font-[500] text-white font-Evolventa">{user.username}</span>
 
-                    <div className=" items-center gap-8 mx-8 ">
-                        {
-                            user && 
-                                <div className="flex items-center">
-                                    <span className="text-xs text-white">Welcome, {user.username}</span>
-                                    <ChevronDown className="h-6 w-6 text-white" />
-                                </div>
-                        }
-                        <Link to="/signin" className="flex items-center">
-                            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2  font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800">Sign in</button>
-                        </Link>   
+                                <Link to="/signin" className="flex items-center ml-2">
+                                    <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Logout
+                                    </button>
+                                </Link>
+                            </div>
+
+
+                        ) : (
+                            <Link to="/signin" className="flex items-center">
+                                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Sign in
+                                </button>
+                            </Link>
+                        )}
                     </div>
                 </div>
-                <div className="lg:hidden">
+                <div className="lg:hidden ">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
                 </div>
                 {isMenuOpen && (
@@ -85,11 +103,17 @@ export default function Navbar() {
                             <div className="px-5 pb-6 pt-5">
                                 <div className="flex items-center justify-between">
                                     <div className="inline-flex items-center space-x-2">
-                                        <span>
-                                            <img src="LogoSymbol.svg" width="60"
-                                                height="60"></img>
-                                        </span>
-                                        <span className="font-bold">Testimonials.io</span>
+
+                                        {user ?
+                                            <div className="flex items-center justify-center gap-2 pr-4">
+                                                <img src="user-icon.svg" width="30px"></img>
+                                                <span className="font-[500] text-white font-Evolventa"> {user.username}</span>
+                                            </div> : <span className="flex items-center justify-center gap-2 pr-4 "  >
+                                                <img src="LogoSymbol.svg" width="60"
+                                                    height="60"></img>
+                                                <span className="font-bold">Testimonials.io</span>
+
+                                            </span>}
                                     </div>
                                     <div className="-mr-2">
                                         <button
@@ -117,14 +141,29 @@ export default function Navbar() {
                                         ))}
                                     </nav>
                                 </div>
-                                <Link to="/signin" className="flex items-center">
-                                <button
-                                    type="button"
-                                    className="mt-4 w-full rounded-md bg-blue-700 px-3 py-2 text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                                >
-                                    Sign In
-                                </button>
-                                </Link>
+                                {user ? (
+
+
+                                    <Link to="/signin" className="flex items-center w-full">
+                                        <button
+
+                                            type="button"
+                                            className="mt-4 w-full rounded-md bg-blue-700 px-3 py-2 text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+                                            Logout
+                                        </button>
+                                    </Link>
+
+
+                                ) : (
+                                    <Link to="/signin" className="flex items-center w-full">
+                                        <button
+
+                                            type="button"
+                                            className="mt-4 w-full rounded-md bg-blue-700 px-3 py-2 text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+                                            Sign in
+                                        </button>
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>

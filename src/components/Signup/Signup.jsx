@@ -30,7 +30,7 @@ function Signup() {
                 //     console.log("user data: ", userData);
                 //     dispatch(storeLogin(userData));
                 //     console.log("if condition completed");
-                    navigate("/");
+                    navigate("/dashboard");
                 // }
             }
         }
