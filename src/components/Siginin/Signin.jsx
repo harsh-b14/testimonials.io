@@ -19,7 +19,7 @@ function Signin() {
             console.log(data);
             const user = await axios.post("http://localhost:8000/user/signin", data);
             console.log(user);
-            navigate("/");
+            navigate("/dashboard");
         }
         catch (error) {
             setError(error);
