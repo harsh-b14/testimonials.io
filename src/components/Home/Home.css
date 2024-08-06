@@ -1,12 +1,25 @@
 .home-container {
-    background-image: url('img.svg');    
-    background-size: cover;
-    background-position:right;
+    /* background-image: url('img.svg');     */
+    /* background-size: cover; */
+    /* background-position:right; */
     filter: brightness(1.2);
-    padding-bottom: 8rem;
+    padding-bottom: 6rem;
     border-radius: 0px 0px 5rem 5rem;
-    margin-top: -4rem;
+    margin-top: -4rem;  
 }
+
+
+.homebg-gradient {
+  backdrop-filter:blur(200px);
+
+  background-image:   
+  radial-gradient(circle at right, rgba(0, 1, 20, 1) 25%, rgba(195, 118, 255, 0) 55% 150px),   
+    radial-gradient(circle at center, rgba(0, 1, 20, 1) 35%, rgba(195, 118, 255, 0) 100% 500px),
+
+    linear-gradient(to bottom, rgba(53, 78, 127, 0.23), rgba(42,60,87,0.4)),
+    linear-gradient(135deg, #030712, #232178);
+}
+
 
 @media only screen and (max-width:767px) {
     .home-container {
@@ -24,10 +37,62 @@ body{
 }
 .text-container{
     margin-left: 8%;
-    /* margin-top: 8%; */
 }
 
-/* .sticky-navbar {
-    position: sticky;
-    z-index: 1000;
-} */
+.circle{
+    position:absolute;
+    border-top-left-radius:50%;
+    border-top-right-radius:50%;
+    border-bottom-right-radius:50%;
+    border-bottom-left-radius:50%;
+    opacity:0.7;
+    filter:blur(50px);
+  }
+  .circle-blue2{
+    background-color:rgb(100, 100, 191);
+    width:300px;
+    height:300px;
+    top:120px;
+    right:0px;
+    filter:blur(70px);
+    opacity:0.4;
+  }
+  .circle-pink2{
+    background-color:rgb(255, 0, 255);
+    width:300px;
+    height:300px;
+    top:120px;
+    left:0px;
+    filter:blur(70px);
+    opacity:0.4;
+
+  }
+  .circle-pink{
+    background-color:rgb(255, 0, 255);
+    width:300px;
+    height:300px;
+    top:20px;
+    left:0px;
+  }
+  .circle-purple{
+    background-color:rgb(128, 0, 128);
+    width:350px;
+    height:350px;
+    top:50px;
+    left:20px;
+  }
+  .circle-blue{
+    background-color:rgb(0, 0, 255);
+    width:400px;
+    height:400px;
+    top:0px;
+    left:0px;
+  }
+  .mesh_gradient{
+    background-image:radial-gradient(at 0% 100%, rgb(176, 87, 255) 0px, transparent 35%), radial-gradient(at 80% 100%, rgb(107, 102, 255) 0px, transparent 35%);
+  }
+  #iisfg{
+    z-index:12;
+    width:932.474951171875px;
+  }
+  

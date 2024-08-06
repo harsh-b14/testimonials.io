@@ -17,9 +17,9 @@ function Signin() {
         setError("");
         try{
             console.log(data);
-            const user = await axios.post("http://localhost:8000/user/signin", data);
+            const user = await axios.post("/user/signin", data);
             console.log(user);
-            navigate("/");
+            navigate("/dashboard");
         }
         catch (error) {
             setError(error);
@@ -29,8 +29,8 @@ function Signin() {
 
     return (
         <>
-            <div className="signin-container pb-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="signin-container pb-8 grad">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 ">
                         <div className=" flex justify-center items-center">
                             <img
                                 className="mx-auto w-3/4 rounded-md object-cover lg:mt-20"

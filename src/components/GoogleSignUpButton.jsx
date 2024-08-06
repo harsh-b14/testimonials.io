@@ -14,7 +14,7 @@ const GoogleSignUpButton = () => {
     console.log(credentialInfo);
 
     try {
-      const { data } = await axios.post('http://localhost:8000/user/googlesignup', {
+      const { data } = await axios.post('/user/googlesignup', {
         token: response.credential,
       });
       console.log('Profile created:', data);

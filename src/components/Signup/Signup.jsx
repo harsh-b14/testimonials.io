@@ -19,7 +19,7 @@ function Signup() {
     const signUpUser = async (data) => {
         setError("");
         try{
-            const response = await axios.post("http://localhost:8000/user/signup", data, {
+            const response = await axios.post("/user/signup", data, {
                 withCredentials: true
             });
             if(response.data) {
@@ -42,7 +42,7 @@ function Signup() {
 
     return (
         <>
-            <div className="signin-container pb-8">
+            <div className="signin-container pb-8 grad">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="flex justify-center items-center">
                             <img

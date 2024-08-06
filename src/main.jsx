@@ -12,6 +12,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google"
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
+import Space from './components/Space/Space.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +23,9 @@ const router = createBrowserRouter(
       </Route>
       <Route path='resetpassword' element={<ResetPassword/>}>
       </Route>
-      <Route path='dashboard' element={<Dashboard/>}></Route>
+      <Route path='dashboard' element={<Dashboard/>}>
+      </Route>
+      <Route path='Space' element={<Space/>}></Route>
 
       <Route path="signup" element={<Signup/>}>
         <Route path="" element={<Home/>}/>

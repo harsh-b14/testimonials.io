@@ -21,7 +21,7 @@ export default function Navbar() {
 
     useEffect(() => {
         const getUserData = async () => {
-            const userData = await axios.get("http://localhost:8000/user/current-user", {
+            const userData = await axios.get("/user/current-user", {
                 withCredentials: true
             });
             console.log("User data: ", userData);
@@ -74,7 +74,7 @@ export default function Navbar() {
                     <div className="items-center gap-8 mx-2">
                         {user ? (
                             <div className="flex items-center justify-center gap-2 pr-4">
-                                <img src="user-icon.svg" width="30px"></img>
+                                <img src="profile-user.png" width="25"></img>
                                 <span className="font-[500] text-white font-Evolventa">{user.username}</span>
 
                                 <Link to="/signin" className="flex items-center ml-2">
@@ -106,7 +106,7 @@ export default function Navbar() {
 
                                         {user ?
                                             <div className="flex items-center justify-center gap-2 pr-4">
-                                                <img src="user-icon.svg" width="30px"></img>
+                                                <img src="profile-user.png" width="25"></img>
                                                 <span className="font-[500] text-white font-Evolventa"> {user.username}</span>
                                             </div> : <span className="flex items-center justify-center gap-2 pr-4 "  >
                                                 <img src="LogoSymbol.svg" width="60"
