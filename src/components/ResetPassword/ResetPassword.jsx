@@ -7,7 +7,9 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-// import OTP from '../OTP/OTP'
+import Snowfall from 'react-snowfall';
+
+
 function ResetPassword() {
 
     const { register, handleSubmit } = useForm()
@@ -83,7 +85,11 @@ function ResetPassword() {
     return (
         <>
             <section>
-                <div className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 lg:py-24 forgot-container ">
+                <div className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 lg:py-24 forgot-container resetbg-gradient">
+                <div className="circle circle-blue3"></div>
+                <div className="circle circle-blue4"></div>
+                <div className="circle circle-blue5 "></div>    
+                <Snowfall snowflakeCount={100} radius={[0.5,0.3]} speed={[0.05, 0.1]}/>
                     <div className="sm:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md items-center">
                         <div className="mb-2 flex justify-center mt-6">
                             <svg

@@ -1,10 +1,19 @@
 .signin-container {
-    background-image: url('signin.svg'); /* Replace with your actual image URL */
     background-size:contain;
     background-position: center;
-    min-height: 100vh; /* Ensure the background covers the entire viewport height */
-    /* padding: 2rem; */
+    min-height: 100vh; /*Ensure the background covers the entire viewport height*/
     filter: brightness(1.2);
+}
+
+.grad {
+    backdrop-filter:blur(150px);
+
+    background-image:   
+    radial-gradient(ellipse at top right, rgba(183, 89, 255, 0.562) 25%, rgba(195, 118, 255, 0) 10% 150px),
+    radial-gradient(ellipse at bottom left, rgba(183, 89, 255, 0.562) 35%, rgba(195, 118, 255, 0) 10% 150px),
+
+    linear-gradient(to bottom, rgba(149, 57, 219, 0.25), rgba(42,60,87,0.4)),
+    linear-gradient(135deg, #030712, #232178);
 }
 
 .backButton{

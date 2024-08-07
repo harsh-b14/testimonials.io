@@ -29,8 +29,8 @@ function Signin() {
 
     return (
         <>
-            <div className="signin-container pb-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="signin-container pb-8 grad">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 ">
                         <div className=" flex justify-center items-center">
                             <img
                                 className="mx-auto w-3/4 rounded-md object-cover lg:mt-20"

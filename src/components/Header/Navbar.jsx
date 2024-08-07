@@ -87,7 +87,7 @@ export default function Navbar() {
                     <div className="items-center gap-8 mx-2">
                         {user ? (
                             <div className="flex items-center justify-center gap-2 pr-4">
-                                <img src="user-icon.svg" width="30px"></img>
+                                <img src="profile-user.png" width="25"></img>
                                 <span className="font-[500] text-white font-Evolventa">{user.username}</span>
                                 <button 
                                     onClick={logOutUser}
@@ -117,7 +117,7 @@ export default function Navbar() {
 
                                         {user ?
                                             <div className="flex items-center justify-center gap-2 pr-4">
-                                                <img src="user-icon.svg" width="30px"></img>
+                                                <img src="profile-user.png" width="25"></img>
                                                 <span className="font-[500] text-white font-Evolventa"> {user.username}</span>
                                             </div> : <span className="flex items-center justify-center gap-2 pr-4 "  >
                                                 <img src="LogoSymbol.svg" width="60"

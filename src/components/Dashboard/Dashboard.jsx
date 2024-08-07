@@ -4,6 +4,8 @@ import './Dashboard.css'
 import ReviewImage from './ReviewImage';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import Snowfall from 'react-snowfall';
+
 
 const Dashboard = () => {
 
@@ -11,8 +13,11 @@ const Dashboard = () => {
         <>
             <Navbar />
 
-            <div className="dashboard-container mb-2 lg:pt-6 lg:mb-8" >
+            <div className="dashboard-container mb-2 lg:pt-6 lg:mb-8 dashboardbg-gradient" >
+
+
                 <div className='flex justify-start'>
+
                     <div className='grid grid-cols-1 lg:grid-cols-2 m-8 lg:mt-28 mt-20 '>
 
                         <div className='mb-4 md:ml-9 md:mb-12 align-text-bottom'>
@@ -33,6 +38,7 @@ const Dashboard = () => {
                             <ReviewImage />
                         </div>
                     </div>
+                    <Snowfall snowflakeCount={100} radius={[0.5,0.3]} speed={[1.0,2.0]}/>
                 </div>
             </div>
 
@@ -68,6 +74,7 @@ const Dashboard = () => {
                         }}>
                         <div className='flex justify-center items-center'>
                             <img src='Happy.svg' width='30' className='Video-icon mx-4 my-2'></img>
+
                         </div>
                         <div className='flex flex-col my-2'>
                             <p className='font-[inter-regular]'>video credits</p>
@@ -98,7 +105,7 @@ const Dashboard = () => {
             <div className='mb-12'>
                 <div className='space-container w-5/6 mx-auto lg:mt-14 md:mt-10 mb-8 lg:mb-16 items-center flex justify-between'>
                     <h1 className='font-[inter-semibold] text-xl md:text-2xl lg:text-3xl text-left inline'>Spaces</h1>
-                    <Link to="">
+                    <Link to="/Space">
                         <button className="text-white bg-[#5182FFFF] hover:bg-blue-800 focus:ring-2  font-medium font-[inter-semibold] rounded-md text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800 inline">+ Create a new spaces</button>
                     </Link>
                 </div>
