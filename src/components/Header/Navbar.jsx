@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CheckCircle, ChevronDown, ChevronUp, Menu, Star, X } from 'lucide-react'
 import "./Header.css"
 import { menuItems } from "../../constants";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+// import Dropdown from 'react-bootstrap/Dropdown';
+// import DropdownButton from 'react-bootstrap/DropdownButton';
 // import { login as storeLogin} from "../../store/authSlice";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [user, setUser] = React.useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -35,7 +37,18 @@ export default function Navbar() {
         getUserData();
     }, [])
 
-    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const logOutUser = async () => {
+        e.preventDefault();
+        try{
+            await axios.get("/user/signout");
+            setUser(null);            
+            console.log("User logged out successfully");
+            navigate("/");
+        }
+        catch(error){
+            console.log("Error while logging out user: ", error);
+        }
+    }
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
@@ -76,15 +89,13 @@ export default function Navbar() {
                             <div className="flex items-center justify-center gap-2 pr-4">
                                 <img src="user-icon.svg" width="30px"></img>
                                 <span className="font-[500] text-white font-Evolventa">{user.username}</span>
-
-                                <Link to="/signin" className="flex items-center ml-2">
-                                    <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Logout
-                                    </button>
-                                </Link>
+                                <button 
+                                    onClick={logOutUser}
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                >
+                                    Logout
+                                </button>
                             </div>
-
-
                         ) : (
                             <Link to="/signin" className="flex items-center">
                                 <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

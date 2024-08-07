@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 
 const GoogleSignUpButton = ({ text }) => {
-  const clientId = '863438307177-pritp613man52ieef0m068dvob631gs4.apps.googleusercontent.com';
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const navigate = useNavigate();
 
   const onSuccess = async (response) => {
