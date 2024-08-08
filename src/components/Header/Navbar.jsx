@@ -38,7 +38,7 @@ export default function Navbar() {
     }, [])
 
     const logOutUser = async () => {
-        e.preventDefault();
+        // e.preventDefault();
         try{
             await axios.get("/user/signout");
             setUser(null);            
@@ -90,7 +90,7 @@ export default function Navbar() {
                                 <img src="profile-user.png" width="25"></img>
                                 <span className="font-[500] text-white font-Evolventa">{user.username}</span>
                                 <button 
-                                    onClick={logOutUser}
+                                    onClick={() => logOutUser()}
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                 >
                                     Logout
@@ -103,7 +103,7 @@ export default function Navbar() {
                                 </button>
                             </Link>
                         )}
-                    </div>
+                    </div>``
                 </div>
                 <div className="lg:hidden ">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
