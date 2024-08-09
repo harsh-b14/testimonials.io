@@ -153,8 +153,6 @@ export default function Navbar() {
                                     </nav>
                                 </div>
                                 {user ? (
-
-
                                     <Link to="/signin" className="flex items-center w-full">
                                         <button
 
@@ -163,8 +161,6 @@ export default function Navbar() {
                                             Logout
                                         </button>
                                     </Link>
-
-
                                 ) : (
                                     <Link to="/signin" className="flex items-center w-full">
                                         <button
