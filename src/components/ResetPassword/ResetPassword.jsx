@@ -90,7 +90,7 @@ function ResetPassword() {
                 <div className="circle circle-blue4"></div>
                 <div className="circle circle-blue5 "></div>    
                 <Snowfall snowflakeCount={100} radius={[0.5,0.3]} speed={[0.05, 0.1]}/>
-                    <div className="sm:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md items-center">
+                    <div className="sm:mx-auto sm:w-full xl:w-full xl:max-w-sm 2xl:max-w-md items-center">
                         <div className="mb-2 flex justify-center mt-6">
                             <svg
                                 width="95"

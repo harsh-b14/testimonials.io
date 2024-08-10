@@ -6,8 +6,8 @@ import "./Header.css"
 import { menuItems } from "../../constants";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+// import Dropdown from 'react-bootstrap/Dropdown';
+// import DropdownButton from 'react-bootstrap/DropdownButton';
 // import { login as storeLogin} from "../../store/authSlice";
 
 export default function Navbar() {
@@ -35,11 +35,11 @@ export default function Navbar() {
         getUserData();
     }, [])
 
-    const [dropdownVisible, setDropdownVisible] = useState(false);
+    // const [dropdownVisible, setDropdownVisible] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdownVisible(!dropdownVisible);
-    };
+    // const toggleDropdown = () => {
+    //     setDropdownVisible(!dropdownVisible);
+    // };
 
     return (
         <>
