@@ -62,10 +62,6 @@ const signUpUser = asyncHandler(async (req, res) => {
     
     const options = {
         httpOnly: true,
-        // secure: true,
-        // sameSite: 'None',
-        // domain: "http://localhost:5173",
-        // path: "/"
     }
     
     return res.status(201)
@@ -127,6 +123,7 @@ const signInUser = asyncHandler(async (req, res) => {
 })
 
 const signOutUser = asyncHandler(async (req, res) => {
+    console.log("Entered signout controller");
     await User.findByIdAndUpdate(
         req.user._id,
         {
@@ -141,16 +138,12 @@ const signOutUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        // secure: true,
-        // sameSite: 'None',
-        // domain: "http://localhost:5173",
-        // path: "/"
     }
-
+    console.log("before return statement");
     return res 
             .status(200)
-            .cookie("accessToken", "", options)
-            .cookie("refreshToken", "", options)
+            .clearCookie("accessToken", {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
+            .clearCookie("refreshToken", {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
             .json(
                 new APIResponse(200, {}, "User logged out successfully")
             )
@@ -168,16 +161,18 @@ const googlesignup = asyncHandler(async (req, res) => {
 
     let user = await User.findOne({ email });
 
-    if (!user) {
-        const username = email.split('@')[0];
-        user = new User({
-            username,
-            email,
-            fullname: name,
-            password: sub
-        });
-        await user.save();
+    if (user) {
+        throw new APIError(409, "Email alredy registered")
     }
+
+    const username = email.split('@')[0];
+    user = new User({
+        username,
+        email,
+        fullname: name,
+        password: sub
+    });
+    await user.save();
 
     const accessToken = await user.generateAccessToken();
     const refreshToken = await user.generateRefreshToken();
@@ -185,19 +180,15 @@ const googlesignup = asyncHandler(async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    const options = {
-        httpOnly: true,
-        // secure: true,
-        // sameSite: 'None',
-        // domain: "http://localhost:5173",
-        // path: "/"
-    }
+    // options = {
+    //     httpOnly : true
+    // }
 
     console.log("route executed");
     return res
             .status(200)
-            .cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", refreshToken, options)
+            .cookie("accessToken", accessToken, {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
+            .cookie("refreshToken", refreshToken, {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
             .json(
                 new APIResponse(200, 
                 {
@@ -209,7 +200,50 @@ const googlesignup = asyncHandler(async (req, res) => {
                         fullname: user.fullname,
                         imageUrl: picture
                     }
-                }, "User logged in successfully with Google")
+                }, "User signed in successfully with Google")
+            )
+});
+
+const googlesignin = asyncHandler(async (req, res) => {
+    console.log("entered signin route");
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const { name, email, picture, sub } = ticket.getPayload();
+
+    const username = email.split('@')[0];
+
+    const user = await User.findOne({ email, username });
+
+    if (!user) {
+        throw new APIError(404, "Email not found, please sign up!")
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    return res
+            .status(200)
+            .cookie("accessToken", accessToken, {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
+            .cookie("refreshToken", refreshToken, {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
+            .json(
+                new APIResponse(200, 
+                {
+                    accessToken,
+                    refreshToken,
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        fullname: user.fullname,
+                        imageUrl: picture
+                    }
+                }, "User signed up successfully with Google")
             )
 })
 
@@ -292,5 +326,6 @@ export {
     verifyOTP,
     sendOTP,
     googlesignup,
-    getCurrentUser
+    getCurrentUser,
+    googlesignin
 }
