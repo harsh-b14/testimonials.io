@@ -38,7 +38,6 @@ export default function Navbar() {
     }, [])
 
     const logOutUser = async () => {
-        // e.preventDefault();
         try{
             await axios.get("/user/signout");
             setUser(null);            
