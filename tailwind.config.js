@@ -22,7 +22,8 @@ export default {
             },
     fontFamily:{
           Evolventa : ["Evolventa" ,"sans-serif"],
-          Inter: ["Inter"]
+          // Inter: ["Inter"],
+          Inter : ["Inter-Regular"]
             },
     extend: {
       

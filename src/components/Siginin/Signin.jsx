@@ -30,10 +30,10 @@ function Signin() {
     return (
         <>
             <div className="signin-container pb-8 grad">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 ">
+                    <div className="grid lg:grid-cols-2 pt-24 lg:pt-4">
                         <div className=" flex justify-center items-center">
                             <img
-                                className="mx-auto w-3/4 rounded-md object-cover lg:mt-20"
+                                className="mx-auto w-3/4 rounded-md object-cover lg:mt-20 hidden lg:block"
                                 src="LogoSymbol.svg"
                                 alt=""
                             />

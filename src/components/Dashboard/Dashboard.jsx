@@ -105,7 +105,7 @@ const Dashboard = () => {
             <div className='mb-12'>
                 <div className='space-container w-5/6 mx-auto lg:mt-14 md:mt-10 mb-8 lg:mb-16 items-center flex justify-between'>
                     <h1 className='font-[inter-semibold] text-xl md:text-2xl lg:text-3xl text-left inline'>Spaces</h1>
-                    <Link to="/Space">
+                    <Link to="/Space1">
                         <button className="text-white bg-[#5182FFFF] hover:bg-blue-800 focus:ring-2  font-medium font-[inter-semibold] rounded-md text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700  dark:focus:ring-blue-800 inline">+ Create a new spaces</button>
                     </Link>
                 </div>

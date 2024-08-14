@@ -37,6 +37,7 @@ export default function Navbar() {
         getUserData();
     }, [])
 
+
     const logOutUser = async () => {
         try{
             await axios.get("/user/signout");
@@ -49,9 +50,9 @@ export default function Navbar() {
         }
     }
 
-    const toggleDropdown = () => {
-        setDropdownVisible(!dropdownVisible);
-    };
+    // const toggleDropdown = () => {
+    //     setDropdownVisible(!dropdownVisible);
+    // };
 
     return (
         <>
@@ -102,7 +103,7 @@ export default function Navbar() {
                                 </button>
                             </Link>
                         )}
-                    </div>``
+                    </div>
                 </div>
                 <div className="lg:hidden ">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
