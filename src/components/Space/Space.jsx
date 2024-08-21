@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import {
     Input,
@@ -27,8 +28,22 @@ function Space1() {
         }
     });
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = (data) => {
+        const formData = {
+            id : uniqueId,
+            spaceTitle : data.headerTitle,
+            spaceTheme : data.colorTheme,
+            spaceCustomMessage : data.customMessage,
+            spaceName : data.spaceName,
+            spaceQuestions : data.questions,
+            updateLogo : data.updateLogo,
+            spaceLogo : data.newLogoURL,
+            spaceCollectStarRating : data.collectStarRating,
+            spaceCollectionType : data.collectionType,
+        }
+        console.log("formdata", formData);
+        
+        console.log("data", data);
     };
 
     const { fields, append, remove } = useFieldArray({
@@ -75,7 +90,7 @@ function Space1() {
     const [headerTitle, setHeaderTitle] = useState('');
     const [customMessage, setCustomMessage] = useState('');
     const [questions, setQuestions] = useState(fields.map(field => field.question));
-
+    const uniqueId = nanoid();
     return (
         <div className='bg-container flex justify-center'>
             <div className='items-center mb-12  rounded-lg mt-8 w-10/12 border-[0.5] text-gray-300'>

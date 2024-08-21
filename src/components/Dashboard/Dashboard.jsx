@@ -12,7 +12,10 @@ const Dashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="dashboard-container mb-2 lg:pt-6 lg:mb-8 dashboardbg-gradient" >
+
+            <div className="dashboard-container bg bg-white mb-2 lg:pt-6 lg:mb-8 dashboardbg-gradient" >
+
+
                 <div className='flex justify-start'>
                     <div className='grid grid-cols-1 lg:grid-cols-2 m-8 lg:mt-28 mt-20 '>
                         <div className='mb-4 md:ml-9 md:mb-12 align-text-bottom'>
