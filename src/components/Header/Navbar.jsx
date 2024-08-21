@@ -39,7 +39,6 @@ export default function Navbar() {
 
 
     const logOutUser = async () => {
-        // e.preventDefault();
         try{
             await axios.get("/user/signout");
             setUser(null);            
@@ -104,7 +103,9 @@ export default function Navbar() {
                                 </button>
                             </Link>
                         )}
+
                     </div>  
+
                 </div>
                 <div className="lg:hidden ">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
