@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Navbar from '../Header/Navbar';
+import StarsCanvas from './star';
 
 const Home = () => { 
     return (
@@ -10,15 +11,16 @@ const Home = () => {
             <div className="home-container homebg-gradient" style={{
                 // backgroundColor: "black",
             }} >
+                
                 {/* <div className="circle circle-pink2"></div> */}
-                <div className="circle circle-blue2 "></div>
+                {/* <div className="circle circle-blue2 "></div> */}
                 <div className='flex pt-32 lg:pt-40'>
                 
                     <div className='text-container w-full relative'>
-
+{/* 
                     <div className="-z-10 flex  absolute right-8  w-6/12 lg:-top-32 md:-top-20 bottom-2" >
                         <img alt="" src="planet.svg" className=''  />
-                    </div>  
+                    </div>   */}
 
                         <h1 className="text-white text-base sm:text-xl md:text-4xl lg:text-6xl font-Inter font-[700]" style={{
                         }}>Get testimonial from your <br /> customer  <span className='text-base sm:text-2xl md:text-4xl lg:text-5.5xl font-Evolventa' style={{
@@ -29,12 +31,14 @@ const Home = () => {
 
                     
                 </div>
+                <StarsCanvas/>
 
             </div>
 
 
 
         </>
+        
     );
 };
 

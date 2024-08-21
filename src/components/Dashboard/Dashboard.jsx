@@ -13,7 +13,7 @@ const Dashboard = () => {
         <>
             <Navbar />
 
-            <div className="dashboard-container mb-2 lg:pt-6 lg:mb-8 dashboardbg-gradient" >
+            <div className="dashboard-container bg bg-white mb-2 lg:pt-6 lg:mb-8 dashboardbg-gradient" >
 
 
                 <div className='flex justify-start'>
