@@ -1,7 +1,5 @@
 import React from 'react'
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-// import { RemoveBgResult, RemoveBgError, removeBackgroundFromImageFile } from 'remove.bg';
-
 import { useState } from 'react';
 import {
     Input,
@@ -22,9 +20,9 @@ function Space1() {
     const { register, control, handleSubmit } = useForm({
         defaultValues: {
             questions: [
-                { question: 'what are you working on?' },
-                { question: 'How has [our product / service] helped y' },
-                { question: 'What is the best thing about [our product' }
+                { question: 'What are you working on?' },
+                { question: 'How has [our product / service] helped?' },
+                { question: 'What is the best thing about [our product / service]?' }
             ]
         }
     });
@@ -91,7 +89,6 @@ function Space1() {
                 }}>
                     <Segmented options={['Create', 'Preview']} value={value} onChange={setValue} className='p-1 bg-slate-300 text-slate-500 rounded-md *:' />
                     <div><Logo /></div>
-
                 </div>
                 {value === "Create" ?
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto mb-8 p-6  font-Inter font-light shadow-xl bg-[#4755696c]" style={{
@@ -102,17 +99,14 @@ function Space1() {
                     }}>
                         <h2 className="text-2xl font-bold mb-4 text-center">Edit Space</h2>
 
-                        <label className=" text-gray-400">Space name * <input {...register('spaceName')} className="w-full bg-slate-300 text-slate-900 p-2 mb-4  active:border-blue-500 rounded-md   text-blank outline-none" onChange={(e) => setSpaceName(e.target.value)} value={spaceName} /></label>
-
-
-
+                        <label className=" text-gray-400">Space name * <input {...register('spaceName')} className="w-full bg-slate-300 text-slate-900 p-2 mb-4  active:border-blue-500 rounded-md   text-blank outline-none" 
+                            onChange={(e) => setSpaceName(e.target.value)} value={spaceName} 
+                        /></label>
                         <div className='mb-4'>
                             <div className='flex'>
                                 <label className=" text-gray-400 flex items-center">Update the logo <input type="checkbox" {...register('updateLogo')} className="w-4 h-4 ml-2 rounded-lg border border-blue-500 inline mr-2" /></label>
-
                                 <span className="text-gray-400">square?</span>
                             </div>
-
                             <div className="mt-2 flex items-center">
                                 <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                                     <img className="h-full w-full object-cover" src="Happy.svg" alt="Current Logo" />
@@ -125,27 +119,19 @@ function Space1() {
                                         <input
                                             type="file"
                                             accept="image/*"
-                                            {...register('newLogoURL')}
+                                            {...register('logoImage')}
                                             id="newLogoURL"
                                             className="newAvatarFile hidden "
                                             onChange={handleImageChange}
                                         />
-
                                         Change
                                     </label>
                                 </span>
                             </div>
                         </div>
-
-
-
                         <label className=" text-gray-400 ">Header title * <input {...register('headerTitle')} className="bg-slate-300 text-slate-900 w-full p-2 mb-4  rounded-md " onChange={(e) => setHeaderTitle(e.target.value)}
                             value={headerTitle} /></label>
-
-
                         <label className=" text-gray-400">Your custom message <textarea {...register('customMessage')} className="w-full p-2 mb-4 bg-slate-300 text-slate-900 rounded-md" onChange={(e) => setCustomMessage(e.target.value)}></textarea></label>
-
-
                         <label className=" text-gray-400">Questions
                             {fields.map((field, index) => (
                                 <div key={field.id} className="flex items-center mb-4">
@@ -298,9 +284,7 @@ function Space1() {
                         </div>
                     </div>}
             </div>
-
         </div>
-        // </div>
     )
 }
 
