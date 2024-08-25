@@ -14,6 +14,7 @@ import {
 import { DownOutlined } from '@ant-design/icons';
 import "./Space.css"
 import Logo from '../Header/Logo';
+import axios from 'axios';
 
 function Space1() {
     const [value, setValue] = useState('Create');
@@ -28,7 +29,7 @@ function Space1() {
         }
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const formData = {
             id : uniqueId,
             spaceTitle : data.headerTitle,
@@ -42,8 +43,12 @@ function Space1() {
             spaceCollectionType : data.collectionType,
         }
         console.log("formdata", formData);
-        
-        console.log("data", data);
+        try{
+            const response = await axios.post('/space/create-space', data);
+            console.log("response  ::::::", response.data);
+        } catch (error){
+            console.log(error)
+        }
     };
 
     const { fields, append, remove } = useFieldArray({

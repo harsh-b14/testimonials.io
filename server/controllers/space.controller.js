@@ -7,8 +7,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const createNewSpace = asyncHandler(async (req, res) => {
     const { userId } = req.user._id;
+    console.log(userId);
     if(!userId){
-        throw new APIError(400, "User not found")
+        throw new APIError(404, "User not found")
     }
 
     const { spaceName, headerTitle, customMessage, collectionType, collectStarRating, colorTheme, spaceQuestions } = req.body;
