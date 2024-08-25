@@ -40,10 +40,11 @@ export default function Navbar() {
 
     const logOutUser = async () => {
         try{
-            await axios.get("/user/signout");
-            setUser(null);            
+            const res = await axios.get("/user/signout");
+            setUser(null);          
+            console.log("res::::", res.data);
             console.log("User logged out successfully");
-            navigate("/");
+            if(res.status === 200) navigate("/");
         }
         catch(error){
             console.log("Error while logging out user: ", error);
@@ -91,21 +92,20 @@ export default function Navbar() {
                                 <span className="font-[500] text-white font-Evolventa">{user.username}</span>
                                 <button 
                                     onClick={() => logOutUser()}
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 z-30"
                                 >
                                     Logout
                                 </button>
                             </div>
                         ) : (
+                        //    <h3>signIN</h3>
                             <Link to="/signin" className="flex items-center">
                                 <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 font-Evolventa font-semibold rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Sign in
                                 </button>
                             </Link>
                         )}
-
                     </div>  
-
                 </div>
                 <div className="lg:hidden ">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />

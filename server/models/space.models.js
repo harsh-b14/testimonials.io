@@ -36,8 +36,8 @@ const spaceSchema = new Schema({
     ],
     collectionType: {
         type: String,
-        enum: ["Text", "Video", "Both text and video"],
-        default: "Text",
+        enum: ["textonly", "videoonly", "textAndVideo"],
+        default: "textonly",
         required: true,
     },
     collectStarRating: {

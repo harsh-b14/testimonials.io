@@ -65,8 +65,8 @@ const signUpUser = asyncHandler(async (req, res) => {
     }
     
     return res.status(201)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
+        .cookie("accessToken", accessToken, {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
+        .cookie("refreshToken", refreshToken, {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
         .json(
            new APIResponse(200, { createdUser} , "User registered successfully")
         );
@@ -100,26 +100,22 @@ const signInUser = asyncHandler(async (req, res) => {
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken"
     )
-    
-    const options = {
-        httpOnly: true,
-    }
 
     return res
-    .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
-    .json(
-        new APIResponse(
-            200, 
-            {
-                user: loggedInUser, 
-                accessToken: accessToken, 
-                refreshToken: refreshToken
-            },
-            "User logged In Successfully"
+        .status(200)
+        .cookie("accessToken", accessToken, {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
+        .cookie("refreshToken", refreshToken, {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
+        .json(
+            new APIResponse(
+                200, 
+                {
+                    user: loggedInUser, 
+                    accessToken: accessToken, 
+                    refreshToken: refreshToken
+                },
+                "User logged In Successfully"
+            )
         )
-    )
 })
 
 const signOutUser = asyncHandler(async (req, res) => {
@@ -136,14 +132,11 @@ const signOutUser = asyncHandler(async (req, res) => {
         }
     )
 
-    const options = {
-        httpOnly: true,
-    }
     console.log("before return statement");
     return res 
             .status(200)
-            .clearCookie("accessToken", {httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
-            .clearCookie("refreshToken", {httpOnly: true, expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
+            .clearCookie("accessToken")
+            .clearCookie("refreshToken")
             .json(
                 new APIResponse(200, {}, "User logged out successfully")
             )
@@ -179,10 +172,6 @@ const googlesignup = asyncHandler(async (req, res) => {
 
     user.refreshToken = refreshToken;
     await user.save();
-
-    // options = {
-    //     httpOnly : true
-    // }
 
     console.log("route executed");
     return res

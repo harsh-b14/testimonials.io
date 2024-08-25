@@ -4,16 +4,19 @@ import { APIResponse } from "../utils/APIResponse.js";
 import { Space } from "../models/space.models.js";
 import { Question } from "../models/question.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { FcQuestions } from "react-icons/fc";
 
 const createNewSpace = asyncHandler(async (req, res) => {
-    const { userId } = req.user._id;
+    const userId = req.user._id;
     console.log(userId);
     if(!userId){
         throw new APIError(404, "User not found")
     }
 
-    const { spaceName, headerTitle, customMessage, collectionType, collectStarRating, colorTheme, spaceQuestions } = req.body;
-    if(!spaceName || !headerTitle || !customMessage || !collectionType || !colorTheme || !spaceQuestions){
+    const { spaceName, headerTitle, customMessage, collectionType, collectStarRating, colorTheme, questions } = req.body;
+    console.log(spaceName, headerTitle, customMessage, collectionType, collectStarRating, colorTheme, questions);
+    console.log(req.body);
+    if(!spaceName || !headerTitle || !customMessage || !collectionType || !colorTheme || !questions){
         throw new APIError(400, "All fields are required")
     }
 
@@ -24,11 +27,11 @@ const createNewSpace = asyncHandler(async (req, res) => {
         throw new APIError(409, "Space name already exist");
     }
 
-    if(collectionType !== "Text" && collectionType !== "Video" && collectionType !== "Both text and video"){
+    if(collectionType !== "textonly" && collectionType !== "videoonly" && collectionType !== "textAndVideo"){
         throw new APIError(400, "Invalid collection type")
     }
 
-    if(!spaceQuestions){
+    if(!questions || questions.length === 0){
         throw new APIError(400, "All questions are required")
     }
 
@@ -38,7 +41,7 @@ const createNewSpace = asyncHandler(async (req, res) => {
     }
     const logoImage = await uploadOnCloudinary(logoImageLocalPath);
 
-    const createdQuestions = await Question.insertMany(spaceQuestions)
+    const createdQuestions = await Question.insertMany(questions)
 
     if(!createdQuestions){
         throw new APIError(500, "Internal server error")
