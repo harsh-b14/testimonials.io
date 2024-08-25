@@ -41,10 +41,11 @@ function Space1() {
             spaceLogo : data.newLogoURL,
             spaceCollectStarRating : data.collectStarRating,
             spaceCollectionType : data.collectionType,
+            selectedImage : selectedImage
         }
         console.log("formdata", formData);
         try{
-            const response = await axios.post('/space/create-space', data);
+            const response = await axios.post('/space/create-space', {...data, selectedImage});
             console.log("response  ::::::", response.data);
         } catch (error){
             console.log(error)
@@ -111,11 +112,14 @@ function Space1() {
                     <div><Logo /></div>
                 </div>
                 {value === "Create" ?
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto mb-8 p-6  font-Inter font-light shadow-xl bg-[#4755696c]" style={{
-                        borderRadius: "0 0 1rem 1rem",
-                        backdropFilter: "blur(30px)",
-                        boxShadow: "0px 0px 0px rgba(227, 228, 237, 0.2)",
-                        border: "1.2px solid rgba(255, 255, 255, 0.18)"
+                    <form onSubmit={handleSubmit(onSubmit)} 
+                        encType="multipart/form-data"
+                        className="w-full mx-auto mb-8 p-6  font-Inter font-light shadow-xl bg-[#4755696c]" 
+                        style={{
+                            borderRadius: "0 0 1rem 1rem",
+                            backdropFilter: "blur(30px)",
+                            boxShadow: "0px 0px 0px rgba(227, 228, 237, 0.2)",
+                            border: "1.2px solid rgba(255, 255, 255, 0.18)"
                     }}>
                         <h2 className="text-2xl font-bold mb-4 text-center">Edit Space</h2>
 
@@ -144,7 +148,7 @@ function Space1() {
                                             className="newAvatarFile hidden "
                                             onChange={handleImageChange}
                                         />
-                                        Change
+                                        Upload
                                     </label>
                                 </span>
                             </div>

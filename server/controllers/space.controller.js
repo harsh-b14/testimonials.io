@@ -35,7 +35,8 @@ const createNewSpace = asyncHandler(async (req, res) => {
         throw new APIError(400, "All questions are required")
     }
 
-    const logoImageLocalPath = req.files?.logoImage[0]?.path;
+    const logoImageLocalPath = req.files;
+    console.log(req.files);
     if(!logoImageLocalPath){
         throw new APIError(400, "Logo image is required")
     }
