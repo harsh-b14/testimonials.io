@@ -45,7 +45,7 @@ function Space1() {
         }
         console.log("formdata", formData);
         try{
-            const response = await axios.post('/space/create-space', {...data, selectedImage});
+            const response = await axios.post('/space/create-space', data );
             console.log("response  ::::::", response.data);
         } catch (error){
             console.log(error)
@@ -96,6 +96,7 @@ function Space1() {
     const [headerTitle, setHeaderTitle] = useState('');
     const [customMessage, setCustomMessage] = useState('');
     const [questions, setQuestions] = useState(fields.map(field => field.question));
+    const [collectionType, setCollectionType] = useState("textonly");
     const uniqueId = nanoid();
     return (
         <div className='bg-container flex justify-center'>
@@ -140,14 +141,26 @@ function Space1() {
                                         htmlFor="newLogoURL"
                                         className="py-2 px-3 bg-slate-300 rounded-md text-sm leading-4 font-medium text-gray-900 hover:bg-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out cursor-pointer "
                                     >
-                                        <input
+                                        <Controller
+                                            name="logo"
+                                            control={control}
+                                            render={({ field }) => (
+                                                <input
+                                                    type="file"
+                                                    {...register('logoImage')}
+                                                    onChange={handleImageChange}
+                                                />
+                                            )}
+                                        />
+                                        
+                                        {/* <input
                                             type="file"
                                             accept="image/*"
                                             {...register('logoImage')}
                                             id="newLogoURL"
                                             className="newAvatarFile hidden "
                                             onChange={handleImageChange}
-                                        />
+                                        /> */}
                                         Upload
                                     </label>
                                 </span>
@@ -193,14 +206,15 @@ function Space1() {
                         <div className='flex flex-wrap gap-16 '>
                             <div>
                                 <label className="grid text-gray-400">Collection type
-                                    <select {...register('collectionType')} className="p-2 mb-4 bg-slate-300 text-slate-900  rounded-md mt-2">
-                                        <option value="textAndVideo">Text and video</option>
+                                    <select {...register('collectionType')} 
+                                        className="p-2 mb-4 bg-slate-300 text-slate-900  rounded-md mt-2"
+                                        onChange={(e) => setCollectionType(e.target.value)}
+                                    >
                                         <option value="textonly">Text only</option>
                                         <option value="videoonly">Video only</option>
-
+                                        <option value="textAndVideo">Text and video</option>
                                     </select>
                                 </label>
-
                             </div>
 
                             <div>
@@ -292,8 +306,24 @@ function Space1() {
                                         ))}
                                     </ul>
                                 </div>
-
-                                <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                {collectionType === "textonly" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                        <button
+                                        className='bg-[#4C5B83] flex justify-center items-center w-4/5 h-10 rounded-md'
+                                        > <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        <span>Send in text</span></button>
+                                    </div>
+                                )}
+                                {collectionType === "videoonly" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                        <button
+                                        className='bg-[#101B43] flex justify-center items-center w-4/5 h-10 rounded-md'
+                                    > <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 inline mr-1 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        <span>Record a video</span></button>
+                                    </div>
+                                )}
+                                {collectionType === "textAndVideo" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
                                     <button
                                         className='bg-[#101B43] flex justify-center items-center w-4/5 h-10 rounded-md'
                                     > <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 inline mr-1 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
@@ -302,8 +332,9 @@ function Space1() {
                                     <button
                                         className='bg-[#4C5B83] flex justify-center items-center w-4/5 h-10 rounded-md'
                                     > <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                                        <span>Record a video</span></button>
-                                </div>
+                                        <span>Send in text</span></button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>}
