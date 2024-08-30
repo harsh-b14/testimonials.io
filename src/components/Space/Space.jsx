@@ -220,7 +220,6 @@ function Space1() {
                             <div>
                                 <section className=''>
                                     <label className='block text-gray-400 mb-2 '>Collect star rating
-
                                     </label>
                                     <Controller
                                         control={control}
