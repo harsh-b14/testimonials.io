@@ -35,7 +35,7 @@ const createNewSpace = asyncHandler(async (req, res) => {
         throw new APIError(400, "All questions are required")
     }
 
-    const logoImageLocalPath = req.files;
+    const logoImageLocalPath = req.files?.logoImage[0].path;
     console.log(req.files);
     if(!logoImageLocalPath){
         throw new APIError(400, "Logo image is required")
@@ -80,7 +80,7 @@ const createNewSpace = asyncHandler(async (req, res) => {
 const getAllSpaces = asyncHandler(async (req, res) => {
     const userId = req.user._id;
     if(!userId){
-        throw new APIError(400, "User not found")
+        throw new APIError(400, "User not found");
     }
 
     const spaces = await Space.find({
@@ -93,7 +93,7 @@ const getAllSpaces = asyncHandler(async (req, res) => {
 
     return res
             .status(200)
-            .json(new APIResponse(200, spaces, "All spaces fetched successfully"))
+            .json(new APIResponse(200, { spaces }, "All spaces fetched successfully"))
 })
 
 export {
