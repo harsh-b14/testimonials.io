@@ -14,6 +14,7 @@ import {
 import { DownOutlined } from '@ant-design/icons';
 import "./Space.css"
 import Logo from '../Header/Logo';
+import axios from 'axios';
 
 function Space1() {
     // const [value, setValue] = useState('Create');
@@ -86,65 +87,89 @@ function Space1() {
     const { register, control, handleSubmit } = useForm({
         defaultValues: {
             questions: [
-                { question: 'what are you working on?' },
-                { question: 'How has [our product / service] helped y' },
-                { question: 'What is the best thing about [our product' }
+                { question: 'What are you working on?' },
+                { question: 'How has [our product / service] helped?' },
+                { question: 'What is the best thing about [our product / service]?' }
             ]
         }
     });
 
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [color, setColor] = useState("#1677ff");
-    const [spaceName, setSpaceName] = useState('');
-    const [headerTitle, setHeaderTitle] = useState('');
-    const [customMessage, setCustomMessage] = useState('');
-    const [questions, setQuestions] = useState([
-        'what are you working on?',
-        'How has [our product / service] helped y',
-        'What is the best thing about [our product'
-    ]);
 
-    const uniqueId = nanoid();
+//     const [selectedImage, setSelectedImage] = useState(null);
+//     const [color, setColor] = useState("#1677ff");
+//     const [spaceName, setSpaceName] = useState('');
+//     const [headerTitle, setHeaderTitle] = useState('');
+//     const [customMessage, setCustomMessage] = useState('');
+//     const [questions, setQuestions] = useState([
+//         'what are you working on?',
+//         'How has [our product / service] helped y',
+//         'What is the best thing about [our product'
+//     ]);
 
-    const onSubmit = (data) => {
-        const formData = new FormData();
+//     const uniqueId = nanoid();
 
-        formData.append('id', uniqueId);
-        formData.append('spaceTitle', data.headerTitle);
-        formData.append('spaceTheme', data.colorTheme);
-        formData.append('spaceCustomMessage', data.customMessage);
-        formData.append('spaceName', data.spaceName);
-        formData.append('spaceQuestions', JSON.stringify(data.questions));
-        formData.append('updateLogo', data.updateLogo);
-        if (data.newLogoURL && data.newLogoURL[0]) {
-            formData.append('spaceLogo', data.newLogoURL[0]);
+//     const onSubmit = (data) => {
+//         const formData = new FormData();
+
+//         formData.append('id', uniqueId);
+//         formData.append('spaceTitle', data.headerTitle);
+//         formData.append('spaceTheme', data.colorTheme);
+//         formData.append('spaceCustomMessage', data.customMessage);
+//         formData.append('spaceName', data.spaceName);
+//         formData.append('spaceQuestions', JSON.stringify(data.questions));
+//         formData.append('updateLogo', data.updateLogo);
+//         if (data.newLogoURL && data.newLogoURL[0]) {
+//             formData.append('spaceLogo', data.newLogoURL[0]);
+//         }
+//         formData.append('spaceCollectStarRating', data.collectStarRating);
+//         formData.append('spaceCollectionType', data.collectionType);
+
+//         // Sending the form data to the backend
+//         // fetch('your-backend-api-url', {
+//         //     method: 'POST',
+//         //     body: formData,
+//         // })
+//         //     .then(response => response.json())
+//         //     .then(result => {
+//         //         console.log('Success:', result);
+//         //     })
+//         //     .catch(error => {
+//         //         console.error('Error:', error);
+//         //     });
+
+//         // Updating the state with the latest form values
+//         setSpaceName(data.spaceName);
+//         setHeaderTitle(data.headerTitle);
+//         setCustomMessage(data.customMessage);
+//         setQuestions(data.questions.map(q => q.question));
+//         if (data.newLogoURL && data.newLogoURL[0]) {
+//             setSelectedImage(URL.createObjectURL(data.newLogoURL[0]));
+//         }
+
+//         console.log(formData);
+// =======
+    const onSubmit = async (data) => {
+        const formData = {
+            id : uniqueId,
+            spaceTitle : data.headerTitle,
+            spaceTheme : data.colorTheme,
+            spaceCustomMessage : data.customMessage,
+            spaceName : data.spaceName,
+            spaceQuestions : data.questions,
+            updateLogo : data.updateLogo,
+            spaceLogo : data.newLogoURL,
+            spaceCollectStarRating : data.collectStarRating,
+            spaceCollectionType : data.collectionType,
+            selectedImage : selectedImage
         }
-        formData.append('spaceCollectStarRating', data.collectStarRating);
-        formData.append('spaceCollectionType', data.collectionType);
-
-        // Sending the form data to the backend
-        // fetch('your-backend-api-url', {
-        //     method: 'POST',
-        //     body: formData,
-        // })
-        //     .then(response => response.json())
-        //     .then(result => {
-        //         console.log('Success:', result);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error:', error);
-        //     });
-
-        // Updating the state with the latest form values
-        setSpaceName(data.spaceName);
-        setHeaderTitle(data.headerTitle);
-        setCustomMessage(data.customMessage);
-        setQuestions(data.questions.map(q => q.question));
-        if (data.newLogoURL && data.newLogoURL[0]) {
-            setSelectedImage(URL.createObjectURL(data.newLogoURL[0]));
+        console.log("formdata", formData);
+        try{
+            const response = await axios.post('/space/create-space', data );
+            console.log("response  ::::::", response.data);
+        } catch (error){
+            console.log(error)
         }
 
-        console.log(formData);
     };
 
     const { fields, append, remove } = useFieldArray({
@@ -171,6 +196,27 @@ function Space1() {
         }
     };
 
+
+    // const removeBackgroundFromImageFile = (selectedImage) =>{({
+    //     path: selectedImage ,
+    //     // apiKey: "QpwLcm4PdHhHFdPMUu2gRBjv",
+    //     size: "regular",
+    //     type: "auto",
+    //     scale: "50%",
+    //     outputFile 
+    //   }).then(setSelectedImage(outputFile)).catch((errors) => {
+    //     console.log(JSON.stringify(errors));
+    //    });
+    // }
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [color, setColor] = useState("#1677ff");
+    const [spaceName, setSpaceName] = useState('');
+    const [headerTitle, setHeaderTitle] = useState('');
+    const [customMessage, setCustomMessage] = useState('');
+    const [questions, setQuestions] = useState(fields.map(field => field.question));
+    const [collectionType, setCollectionType] = useState("textonly");
+    const uniqueId = nanoid();
+
     return (
         <div className='bg-container flex justify-center'>
             <div className='items-center mb-12  rounded-lg mt-8 w-10/12 border-[0.5] text-gray-300'>
@@ -184,28 +230,27 @@ function Space1() {
                 }}>
                     <Segmented options={['Create', 'Preview']} value={value} onChange={setValue} className='p-1 bg-slate-300 text-slate-500 rounded-md *:' />
                     <div><Logo /></div>
-
                 </div>
                 {value === "Create" ?
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto mb-8 p-6  font-Inter font-light shadow-xl bg-[#4755696c]" style={{
-                        borderRadius: "0 0 1rem 1rem",
-                        backdropFilter: "blur(30px)",
-                        boxShadow: "0px 0px 0px rgba(227, 228, 237, 0.2)",
-                        border: "1.2px solid rgba(255, 255, 255, 0.18)"
+                    <form onSubmit={handleSubmit(onSubmit)} 
+                        encType="multipart/form-data"
+                        className="w-full mx-auto mb-8 p-6  font-Inter font-light shadow-xl bg-[#4755696c]" 
+                        style={{
+                            borderRadius: "0 0 1rem 1rem",
+                            backdropFilter: "blur(30px)",
+                            boxShadow: "0px 0px 0px rgba(227, 228, 237, 0.2)",
+                            border: "1.2px solid rgba(255, 255, 255, 0.18)"
                     }}>
                         <h2 className="text-2xl font-bold mb-4 text-center">Edit Space</h2>
 
-                        <label className=" text-gray-400">Space name * <input {...register('spaceName')} className="w-full bg-slate-300 text-slate-900 p-2 mb-4  active:border-blue-500 rounded-md   text-blank outline-none" onChange={(e) => setSpaceName(e.target.value)} value={spaceName} /></label>
-
-
-
+                        <label className=" text-gray-400">Space name * <input {...register('spaceName')} className="w-full bg-slate-300 text-slate-900 p-2 mb-4  active:border-blue-500 rounded-md   text-blank outline-none" 
+                            onChange={(e) => setSpaceName(e.target.value)} value={spaceName} 
+                        /></label>
                         <div className='mb-4'>
                             <div className='flex'>
                                 <label className=" text-gray-400 flex items-center">Update the logo <input type="checkbox" {...register('updateLogo')} className="w-4 h-4 ml-2 rounded-lg border border-blue-500 inline mr-2" /></label>
-
                                 <span className="text-gray-400">square?</span>
                             </div>
-
                             <div className="mt-2 flex items-center">
                                 <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                                     <img className="h-full w-full object-cover" src={selectedImage} alt="Current Logo" />
@@ -215,30 +260,34 @@ function Space1() {
                                         htmlFor="newLogoURL"
                                         className="py-2 px-3 bg-slate-300 rounded-md text-sm leading-4 font-medium text-gray-900 hover:bg-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out cursor-pointer "
                                     >
-                                        <input
+                                        <Controller
+                                            name="logo"
+                                            control={control}
+                                            render={({ field }) => (
+                                                <input
+                                                    type="file"
+                                                    {...register('logoImage')}
+                                                    onChange={handleImageChange}
+                                                />
+                                            )}
+                                        />
+                                        
+                                        {/* <input
                                             type="file"
                                             accept="image/*"
-                                            {...register('newLogoURL')}
+                                            {...register('logoImage')}
                                             id="newLogoURL"
                                             className="newAvatarFile hidden "
                                             onChange={handleImageChange}
-                                        />
-
-                                        Change
+                                        /> */}
+                                        Upload
                                     </label>
                                 </span>
                             </div>
                         </div>
-
-
-
                         <label className=" text-gray-400 ">Header title * <input {...register('headerTitle')} className="bg-slate-300 text-slate-900 w-full p-2 mb-4  rounded-md " onChange={(e) => setHeaderTitle(e.target.value)}
                             value={headerTitle} /></label>
-
-
                         <label className=" text-gray-400">Your custom message <textarea {...register('customMessage')} className="w-full p-2 mb-4 bg-slate-300 text-slate-900 rounded-md" onChange={(e) => setCustomMessage(e.target.value)}></textarea></label>
-
-
                         <label className=" text-gray-400">Questions
                             {fields.map((field, index) => (
                                 <div key={field.id} className="flex items-center mb-4">
@@ -276,20 +325,20 @@ function Space1() {
                         <div className='flex flex-wrap gap-16 '>
                             <div>
                                 <label className="grid text-gray-400">Collection type
-                                    <select {...register('collectionType')} className="p-2 mb-4 bg-slate-300 text-slate-900  rounded-md mt-2">
-                                        <option value="textAndVideo">Text and video</option>
+                                    <select {...register('collectionType')} 
+                                        className="p-2 mb-4 bg-slate-300 text-slate-900  rounded-md mt-2"
+                                        onChange={(e) => setCollectionType(e.target.value)}
+                                    >
                                         <option value="textonly">Text only</option>
                                         <option value="videoonly">Video only</option>
-
+                                        <option value="textAndVideo">Text and video</option>
                                     </select>
                                 </label>
-
                             </div>
 
                             <div>
                                 <section className=''>
                                     <label className='block text-gray-400 mb-2 '>Collect star rating
-
                                     </label>
                                     <Controller
                                         control={control}
@@ -375,8 +424,24 @@ function Space1() {
                                         ))}
                                     </ul>
                                 </div>
-
-                                <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                {collectionType === "textonly" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                        <button
+                                        className='bg-[#4C5B83] flex justify-center items-center w-4/5 h-10 rounded-md'
+                                        > <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        <span>Send in text</span></button>
+                                    </div>
+                                )}
+                                {collectionType === "videoonly" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
+                                        <button
+                                        className='bg-[#101B43] flex justify-center items-center w-4/5 h-10 rounded-md'
+                                    > <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 inline mr-1 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        <span>Record a video</span></button>
+                                    </div>
+                                )}
+                                {collectionType === "textAndVideo" && (
+                                    <div className='flex flex-wrap gap-4 justify-center mb-12'>
                                     <button
                                         className='bg-[#101B43] flex justify-center items-center w-4/5 h-10 rounded-md'
                                     > <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 inline mr-1 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
@@ -385,15 +450,14 @@ function Space1() {
                                     <button
                                         className='bg-[#4C5B83] flex justify-center items-center w-4/5 h-10 rounded-md'
                                     > <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                                        <span>Record a video</span></button>
-                                </div>
+                                        <span>Send in text</span></button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>}
             </div>
-
         </div>
-        // </div>
     )
 }
 

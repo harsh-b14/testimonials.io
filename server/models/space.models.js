@@ -18,23 +18,37 @@ const spaceSchema = new Schema({
         required: true,
         trim: true
     },
-    customMessaage: {
+    logoImage: {
         type: String,
         required: true,
         trim: true
     },
-    collectionType: {
+    customMessage: {
         type: String,
-        enum: ["Text", "Video", "Both text and video"],
-        default: "Text",
         required: true,
+        trim: true
     },
-    questions: [
+    spaceQuestions: [
         {
             type: Schema.Types.ObjectId,
             ref: "Question"
         }
-    ]
+    ],
+    collectionType: {
+        type: String,
+        enum: ["textonly", "videoonly", "textAndVideo"],
+        default: "textonly",
+        required: true,
+    },
+    collectStarRating: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    colorTheme: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true })
 
 export const Space = mongoose.model("Space", spaceSchema)
