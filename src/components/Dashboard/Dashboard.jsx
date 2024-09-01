@@ -5,9 +5,31 @@ import ReviewImage from './ReviewImage';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Snowfall from 'react-snowfall';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 const Dashboard = () => {
+
+    const [user, setUser] = React.useState(null);
+
+    useEffect(() => {
+        const getUserData = async () => {
+            const userData = await axios.get("/user/current-user", {
+                withCredentials: true
+            });
+            console.log("User data: ", userData);
+            if (userData.data) {
+                console.log("user data || data: ", userData.data.data.user.username);
+                // dispatch(storeLogin(userData));
+                setUser(userData.data.data.user);
+                console.log("if condition completed");
+            }
+        }
+        getUserData();
+    }, [])
+
+
 
     return (
         <>
@@ -38,7 +60,7 @@ const Dashboard = () => {
                             <ReviewImage />
                         </div>
                     </div>
-                    <Snowfall snowflakeCount={100} radius={[0.5,0.3]} speed={[1.0,2.0]}/>
+                    <Snowfall snowflakeCount={100} radius={[0.5, 0.3]} speed={[1.0, 2.0]} />
                 </div>
             </div>
 
@@ -99,6 +121,7 @@ const Dashboard = () => {
                             <p className='font-[inter-semibold]'>Free plan</p>
                         </div>
                     </div>
+                    
                 </div>
             </div >
 
@@ -110,9 +133,40 @@ const Dashboard = () => {
                     </Link>
                 </div>
 
-                <div className='flex justify-center'>
-                    <img src='no-space.svg' className='no-space'></img>
+                <div className='flex w-5/6 mx-auto lg:mt-14 md:mt-10 mb-6 md:mb-8 lg:mb-16'>
+                    {user ? (
+
+                        <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12 md:gap-12">
+                            <li className='col-span-1 flex shadow-sm rounded-md border border-[#4c5b83]  hover:shadow-md font-Inter w-full' onClick={() => navigateToSpaceInfo(user.id)}>
+                                <img src='no-space.svg' className='bg-white object-contain inline-flex items-center justify-center w-20 h-auto rounded-l-md cursor-pointer'></img>
+
+                                <div className='flex-1 flex items-center justify-between  bg-white dark:hover:bg-gray-100 rounded-r-md border-l border-[#4c5b83]'>
+                                    <div className='flex-1 p-4 cursor-pointer '>
+                                        <div className='text-gray-600 test-md font-medium hover:text-gray-800'>{user.username}</div>
+
+                                        <div className='grid grid-cols-2 mt-2'>
+                                            <p className='text-gray-500 text-sm pr-14'>
+                                                Videos :{user.username}
+                                            </p>
+                                            <p className='text-gray-500 text-sm'>
+                                                Text : {user.username}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+
+
+
+
+                    )
+
+
+                        : (<img src='no-space.svg' className='no-space'></img>)}
                 </div>
+
             </div>
             <Footer />
         </>
