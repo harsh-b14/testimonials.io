@@ -21,7 +21,6 @@ const Dashboard = () => {
             console.log("User data: ", userData);
             if (userData.data) {
                 console.log("user data || data: ", userData.data.data.user.username);
-                // dispatch(storeLogin(userData));
                 setUser(userData.data.data.user);
                 console.log("if condition completed");
             }
@@ -126,7 +125,7 @@ const Dashboard = () => {
                     </Link>
                 </div>
 
-                <div className='flex w-5/6 mx-auto lg:mt-14 md:mt-10 mb-6 md:mb-8 lg:mb-16'>
+                <div className='flex justify-center w-5/6 mx-auto lg:mt-14 md:mt-10 mb-6 md:mb-8 lg:mb-16'>
                     {user ? (
 
                         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12 md:gap-12">
@@ -157,7 +156,11 @@ const Dashboard = () => {
                     )
 
 
-                        : (<img src='no-space.svg' className='no-space'></img>)}
+                        : (
+                            <div className='emptySpace flex justify-center items-center'>
+                                <img src='no-space.svg' className='no-space'></img>
+                            </div>
+                        )}
 
                 </div>
 

@@ -97,3 +97,9 @@ body{
     width:932.474951171875px;
   }
   
+  @media (max-width: 768px) {
+    .spline-hidden {
+      display: none;
+    }
+  }
+  

@@ -15,75 +15,13 @@ import { DownOutlined } from '@ant-design/icons';
 import "./Space.css"
 import Logo from '../Header/Logo';
 import axios from 'axios';
-
+import StarsCanvas from '../Home/star';
 function Space1() {
-    // const [value, setValue] = useState('Create');
-    // const [open, setOpen] = useState(false);
-    // const { register, control, handleSubmit } = useForm({
-    //     defaultValues: {
-    //         questions: [
-    //             { question: 'what are you working on?' },
-    //             { question: 'How has [our product / service] helped y' },
-    //             { question: 'What is the best thing about [our product' }
-    //         ]
-    //     }
-    // });
-
-    // const onSubmit = (data) => {
-    //     const formData = {
-    //         id: uniqueId,
-    //         spaceTitle: data.headerTitle,
-    //         spaceTheme: data.colorTheme,
-    //         spaceCustomMessage: data.customMessage,
-    //         spaceName: data.spaceName,
-    //         spaceQuestions: data.questions,
-    //         updateLogo: data.updateLogo,
-    //         spaceLogo: data.newLogoURL,
-    //         spaceCollectStarRating: data.collectStarRating,
-    //         spaceCollectionType: data.collectionType,
-    //     }
-    //     console.log("formdata", formData);
-
-    //     console.log("data", data);
-    // };
-
-    // const { fields, append, remove } = useFieldArray({
-    //     control,
-    //     name: 'questions'
-    // });
-
-    // const handleQuestionChange = (index, value) => {
-    //     const newQuestions = [...questions];
-    //     newQuestions[index] = value;
-    //     setQuestions(newQuestions);
-    // };
-
-    // const handleRemove = (index) => {
-    //     const newQuestions = questions.filter((_, i) => i !== index);
-    //     setQuestions(newQuestions);
-    //     remove(index);
-    // };
-
-    // const handleImageChange = (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         setSelectedImage(URL.createObjectURL(file));
-    //     }
-    //     else {
-    //         setSelectedImage(URL.createObjectURL(image))
-    //     }
-    // };
-
-    // const [selectedImage, setSelectedImage] = useState(null);
-    // const [color, setColor] = useState("#1677ff");
-    // const [spaceName, setSpaceName] = useState('');
-    // const [headerTitle, setHeaderTitle] = useState('');
-    // const [customMessage, setCustomMessage] = useState('');
-    // const [questions, setQuestions] = useState(fields.map(field => field.question));
-    // const uniqueId = nanoid();
+    
 
     const [value, setValue] = useState('Create');
     const [open, setOpen] = useState(false);
+    
     const { register, control, handleSubmit } = useForm({
         defaultValues: {
             questions: [
@@ -95,59 +33,6 @@ function Space1() {
     });
 
 
-//     const [selectedImage, setSelectedImage] = useState(null);
-//     const [color, setColor] = useState("#1677ff");
-//     const [spaceName, setSpaceName] = useState('');
-//     const [headerTitle, setHeaderTitle] = useState('');
-//     const [customMessage, setCustomMessage] = useState('');
-//     const [questions, setQuestions] = useState([
-//         'what are you working on?',
-//         'How has [our product / service] helped y',
-//         'What is the best thing about [our product'
-//     ]);
-
-//     const uniqueId = nanoid();
-
-//     const onSubmit = (data) => {
-//         const formData = new FormData();
-
-//         formData.append('id', uniqueId);
-//         formData.append('spaceTitle', data.headerTitle);
-//         formData.append('spaceTheme', data.colorTheme);
-//         formData.append('spaceCustomMessage', data.customMessage);
-//         formData.append('spaceName', data.spaceName);
-//         formData.append('spaceQuestions', JSON.stringify(data.questions));
-//         formData.append('updateLogo', data.updateLogo);
-//         if (data.newLogoURL && data.newLogoURL[0]) {
-//             formData.append('spaceLogo', data.newLogoURL[0]);
-//         }
-//         formData.append('spaceCollectStarRating', data.collectStarRating);
-//         formData.append('spaceCollectionType', data.collectionType);
-
-//         // Sending the form data to the backend
-//         // fetch('your-backend-api-url', {
-//         //     method: 'POST',
-//         //     body: formData,
-//         // })
-//         //     .then(response => response.json())
-//         //     .then(result => {
-//         //         console.log('Success:', result);
-//         //     })
-//         //     .catch(error => {
-//         //         console.error('Error:', error);
-//         //     });
-
-//         // Updating the state with the latest form values
-//         setSpaceName(data.spaceName);
-//         setHeaderTitle(data.headerTitle);
-//         setCustomMessage(data.customMessage);
-//         setQuestions(data.questions.map(q => q.question));
-//         if (data.newLogoURL && data.newLogoURL[0]) {
-//             setSelectedImage(URL.createObjectURL(data.newLogoURL[0]));
-//         }
-
-//         console.log(formData);
-// =======
     const onSubmit = async (data) => {
         const formData = {
             id : uniqueId,
@@ -196,18 +81,6 @@ function Space1() {
         }
     };
 
-
-    // const removeBackgroundFromImageFile = (selectedImage) =>{({
-    //     path: selectedImage ,
-    //     // apiKey: "QpwLcm4PdHhHFdPMUu2gRBjv",
-    //     size: "regular",
-    //     type: "auto",
-    //     scale: "50%",
-    //     outputFile 
-    //   }).then(setSelectedImage(outputFile)).catch((errors) => {
-    //     console.log(JSON.stringify(errors));
-    //    });
-    // }
     const [selectedImage, setSelectedImage] = useState(null);
     const [color, setColor] = useState("#1677ff");
     const [spaceName, setSpaceName] = useState('');
@@ -219,7 +92,7 @@ function Space1() {
 
     return (
         <div className='bg-container flex justify-center'>
-            <div className='items-center mb-12  rounded-lg mt-8 w-10/12 border-[0.5] text-gray-300'>
+            <div className='items-center mb-28  rounded-lg mt-8 w-10/12 border-[0.5] text-gray-300 min-h-fit'>
                 <div className='bg-[#4755696c] py-4 border rounded-2xl mx-auto px-6 mt-4 flex justify-between shadow-xl' style={{
                     borderRadius: " 1rem 1rem 0 0",
                     borderBottomColor: "black",
@@ -457,6 +330,7 @@ function Space1() {
                         </div>
                     </div>}
             </div>
+            {/* <StarsCanvas/>   */}
         </div>
     )
 }
